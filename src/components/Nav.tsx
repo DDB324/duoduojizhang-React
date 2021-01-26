@@ -1,58 +1,31 @@
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
 import React from 'react';
-import Icon from './Icon';
+import NavLink from './NavLink';
 
-const NavWrapper = styled.div`
-  line-height: 24px;
+const NavUl = styled.ul`
   box-shadow: 0 0 3px rgba(0, 0, 0, .25);
+  line-height: 24px;
+  display: flex;
 
-  > ul {
-    display: flex;
-
-    > li {
-      width: 33.3%;
-      padding: 4px 0;
-
-      > a {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        > .icon {
-          height: 24px;
-          width: 24px;
-        }
-      }
-    }
+  > li {
+    width: 33.3%;
+    padding: 4px 0;
   }
 `;
 
 const Nav = () => {
   return (
-    <NavWrapper>
-      <ul>
-        <li>
-          <Link to="/detail">
-            <Icon name='detail'/>
-            明细
-          </Link>
-        </li>
-        <li>
-          <Link to="/money">
-            <Icon name='money'/>
-            记账
-          </Link>
-        </li>
-        <li>
-          <Link to="/chart">
-            <Icon name='chart'/>
-            图表
-          </Link>
-        </li>
-      </ul>
-    </NavWrapper>
+    <NavUl>
+      <li>
+        <NavLink name='detail' text='明细'/>
+      </li>
+      <li>
+        <NavLink name='money' text='记账'/>
+      </li>
+      <li>
+        <NavLink name='chart' text='图表'/>
+      </li>
+    </NavUl>
   );
 };
 
