@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import React from 'react';
-
-require('icons/chart.svg');
-require('icons/detail.svg');
-require('icons/money.svg');
+import Icon from './Icon';
 
 const NavWrapper = styled.div`
   line-height: 24px;
@@ -38,25 +35,19 @@ const Nav = () => {
       <ul>
         <li>
           <Link to="/detail">
-            <svg className={'icon'}>
-              <use xlinkHref='#detail'/>
-            </svg>
-            <span>明细</span>
+            <Icon name='detail'/>
+            明细
           </Link>
         </li>
         <li>
           <Link to="/money">
-            <svg className={'icon'}>
-              <use xlinkHref='#money'/>
-            </svg>
+            <Icon name='money'/>
             记账
           </Link>
         </li>
         <li>
           <Link to="/chart">
-            <svg className={'icon'}>
-              <use xlinkHref='#chart'/>
-            </svg>
+            <Icon name='chart'/>
             图表
           </Link>
         </li>
