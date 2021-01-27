@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import Icon from '../components/Icon';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  position: relative;
 `;
 
 const Main = styled.div`
@@ -31,7 +33,7 @@ const CategorySection = styled.section`
           content: '';
           position: absolute;
           display: block;
-          bottom: -12.5px;
+          bottom: -11px;
           left: 0;
           height: 2.5px;
           background: black;
@@ -72,11 +74,73 @@ const TagsSection = styled.section`
         background: #f6f5f5;
         border-radius: 50%;
         margin-bottom: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.selected {
+          background: #ffda43;
+        }
+
+        > .icon {
+          width: 60px;
+          height: 60px;
+        }
       }
     }
   }
 `;
 const NumberPadSection = styled.section`
+  background: #f3f3f3;
+
+  > .NoteAndOutput {
+    display: flex;line-height: 50px;
+    border-top: 1px solid #cccccc;justify-content: space-between;
+
+
+    > label {
+      display: flex;align-items: center;
+      justify-content: right;flex-grow: 1;
+
+      > .icon {
+        width: 1.2em;height: 1.2em;margin: 0 4px;
+      }
+
+      > span {
+        margin-right: 8px;white-space: nowrap;
+      }
+
+      > input {
+        height: 48px;background: none;
+        font-size: inherit;flex-grow: 1;
+        width: 0;
+      }
+    }
+
+    > .output {
+      padding-right: 12px;font-size: 30px;flex-shrink: 0;
+    }
+  }
+
+  > .pad {
+    display: flex;flex-wrap: wrap;border-top: 1px solid #cccccc;
+
+    > button {
+      width: 25%;height: 64px;
+      border-right: 1px solid #cacaca;
+      border-bottom: 1px solid #cacaca;font-size: 18px;
+
+      &:nth-child(13), &:nth-child(14),
+      &:nth-child(15), &:nth-child(16) {
+        border-bottom: none;
+      }
+
+      &:nth-child(4), &:nth-child(8),
+      &:nth-child(12), &:nth-child(16) {
+        border-right: none;
+      }
+    }
+  }
 `;
 
 const Money = () => {
@@ -93,139 +157,205 @@ const Money = () => {
         <TagsSection>
           <ul>
             <li>
-              <div>logo</div>
+              <div className='selected'>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
             <li>
-              <div>logo</div>
+              <div>
+                <Icon name='money'/>
+              </div>
               <span>图表1</span>
             </li>
           </ul>
         </TagsSection>
       </Main>
       <NumberPadSection>
-        <span>备注</span>
-        <span>100</span>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>日期</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>+</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>-</button>
-        <button>.</button>
-        <button>0</button>
-        <button>删除</button>
-        <button>完成</button>
+        <div className='NoteAndOutput'>
+            <label>
+              <Icon name='money'/>
+              <span>备注:</span>
+              <input type="text" placeholder='点击写备注...'/>
+            </label>
+          <div className='output'>
+            <span>100</span>
+          </div>
+        </div>
+        <div className='pad'>
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button>日期</button>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button>+</button>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>-</button>
+          <button>.</button>
+          <button>0</button>
+          <button>删除</button>
+          <button>完成</button>
+        </div>
       </NumberPadSection>
     </Wrapper>
   );

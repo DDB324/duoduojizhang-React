@@ -30,3 +30,10 @@ body {
   fill: currentColor;
   overflow: hidden;
 }
+
+input,
+button {
+  font-family: inherit;
+  outline: none;
+  border: 1px solid transparent;
+}
