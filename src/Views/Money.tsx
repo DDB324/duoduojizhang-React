@@ -1,6 +1,16 @@
 import React from 'react';
-import Layout from '../components/Layout';
 import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
+const Main = styled.div`
+  flex-grow: 1;
+  overflow: auto;
+`;
 
 const CategorySection = styled.section`
   background: #ffda43;
@@ -21,7 +31,7 @@ const CategorySection = styled.section`
           content: '';
           position: absolute;
           display: block;
-          bottom: -12px;
+          bottom: -12.5px;
           left: 0;
           height: 2.5px;
           background: black;
@@ -40,13 +50,38 @@ const CategorySection = styled.section`
   }
 `;
 const TagsSection = styled.section`
+  padding: 12px 20px 0;
+  overflow: auto;
+
+  > ul {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+
+    > li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 25%;
+      padding: 12px 0;
+
+      > div {
+        width: 60px;
+        height: 60px;
+        background: #f6f5f5;
+        border-radius: 50%;
+        margin-bottom: 4px;
+      }
+    }
+  }
 `;
 const NumberPadSection = styled.section`
 `;
 
 const Money = () => {
   return (
-    <Layout>
+    <Wrapper>
       <CategorySection>
         <ul>
           <li><span className='selected'>支出</span></li>
@@ -54,19 +89,124 @@ const Money = () => {
         </ul>
         <span>取消</span>
       </CategorySection>
-      <TagsSection>
-        <ul>
-          <li>图表1</li>
-          <li>图表2</li>
-          <li>图表3</li>
-          <li>图表4</li>
-          <li>图表5</li>
-          <li>图表6</li>
-          <li>图表7</li>
-          <li>图表8</li>
-          <li>图表9</li>
-        </ul>
-      </TagsSection>
+      <Main>
+        <TagsSection>
+          <ul>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+            <li>
+              <div>logo</div>
+              <span>图表1</span>
+            </li>
+          </ul>
+        </TagsSection>
+      </Main>
       <NumberPadSection>
         <span>备注</span>
         <span>100</span>
@@ -87,7 +227,7 @@ const Money = () => {
         <button>删除</button>
         <button>完成</button>
       </NumberPadSection>
-    </Layout>
+    </Wrapper>
   );
 };
 
