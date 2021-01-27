@@ -1,5 +1,5 @@
 import Icon from './Icon';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -9,6 +9,10 @@ const LinkWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    &.selected {
+      color: red;
+    }
 
     > .icon {
       height: 24px;
@@ -21,15 +25,15 @@ type Props = {
   name: string,
   text: string,
 }
-const NavLink = (props: Props) => {
+const NavIconLink = (props: Props) => {
   return (
     <LinkWrapper>
-      <Link to={'/' + props.name}>
+      <NavLink to={'/' + props.name} activeClassName='selected'>
         <Icon name={props.name}/>
         {props.text}
-      </Link>
+      </NavLink>
     </LinkWrapper>
   );
 };
 
-export default NavLink;
+export default NavIconLink;
