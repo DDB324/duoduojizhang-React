@@ -34,8 +34,8 @@ const Wrapper = styled.section`
         }
 
         > .icon {
-          width: 60px;
-          height: 60px;
+          width: 48px;
+          height: 48px;
         }
       }
     }
@@ -43,6 +43,7 @@ const Wrapper = styled.section`
 `;
 
 const TagsSection: React.FC = () => {
+    const [selectedTag, setSelectedTag] = useState<string[]>([]);
     //这里只记录了名字,后面要做另一个页面展示logo,然后设置name,再把logo和name放到数组中展示出来
     const [tags, setTags] = useState<string[]>(['记账', '明细', '图表']);
     const addTag = () => {
@@ -51,13 +52,22 @@ const TagsSection: React.FC = () => {
         setTags([...tags, tagName]);
       }
     };
+    const onToggleTag = (tag: string) => {
+      const index = selectedTag?.indexOf(tag);
+      if (index >= 0) {
+        setSelectedTag([]);
+      } else {
+        setSelectedTag([tag]);
+      }
+    };
+    const getClass = (tag: string) => selectedTag?.indexOf(tag) >= 0 ? 'selected' : '';
     return (
       <Wrapper>
         <ul>
           {tags.map(tag => {
             return (
-              <li key={tag}>
-                <div>
+              <li key={tag} onClick={() => onToggleTag(tag)}>
+                <div className={getClass(tag)}>
                   <Icon name='detail'/>
                 </div>
                 <span>{tag}</span>
