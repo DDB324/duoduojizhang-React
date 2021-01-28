@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import Icon from '../../components/Icon';
+import React from 'react';
 
-const NumberPadSection = styled.section`
+const Wrapper = styled.section`
   background: #f3f3f3;
 
   > .NoteAndOutput {
@@ -67,4 +69,39 @@ const NumberPadSection = styled.section`
     }
   }
 `;
+
+const NumberPadSection: React.FC = () => {
+  return (
+    <Wrapper>
+      <div className='NoteAndOutput'>
+        <label>
+          <Icon name='money'/>
+          <span>备注:</span>
+          <input type="text" placeholder='点击写备注...'/>
+        </label>
+        <div className='output'>
+          <span>100</span>
+        </div>
+      </div>
+      <div className='pad'>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>日期</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>+</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>-</button>
+        <button>.</button>
+        <button>0</button>
+        <button>删除</button>
+        <button>完成</button>
+      </div>
+    </Wrapper>
+  );
+};
 export {NumberPadSection};

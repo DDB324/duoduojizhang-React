@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import React from 'react';
 
-const CategorySection = styled.section`
+const Wrapper = styled.section`
   background: #ffda43;
   position: relative;
 
@@ -37,5 +38,17 @@ const CategorySection = styled.section`
     transform: translateY(-50%);
   }
 `;
+const CategorySection: React.FC = () => {
+  return (
+    <Wrapper>
+      <ul>
+        <li><span className='selected'>支出</span></li>
+        <li><span>收入</span></li>
+      </ul>
+      <span>取消</span>
+    </Wrapper>
+  );
+};
 
-export {CategorySection}
+
+export {CategorySection};

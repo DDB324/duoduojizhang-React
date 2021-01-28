@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import Icon from '../../components/Icon';
+import React from 'react';
 
-const TagsSection = styled.section`
+const Wrapper = styled.section`
   padding: 12px 20px 0;
   overflow: auto;
 
@@ -40,4 +42,181 @@ const TagsSection = styled.section`
   }
 `;
 
-export {TagsSection}
+const TagsSection: React.FC = () => {
+  return (
+    <Wrapper>
+      <ul>
+        <li>
+          <div className='selected'>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+        <li>
+          <div>
+            <Icon name='money'/>
+          </div>
+          <span>图表1</span>
+        </li>
+      </ul>
+    </Wrapper>
+  );
+};
+
+export {TagsSection};
