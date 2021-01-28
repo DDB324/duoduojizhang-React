@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Icon from '../../components/Icon';
-import React from 'react';
+import React, {useState} from 'react';
 
 const Wrapper = styled.section`
   padding: 12px 20px 0;
@@ -43,180 +43,25 @@ const Wrapper = styled.section`
 `;
 
 const TagsSection: React.FC = () => {
-  return (
-    <Wrapper>
-      <ul>
-        <li>
-          <div className='selected'>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-        <li>
-          <div>
-            <Icon name='money'/>
-          </div>
-          <span>图表1</span>
-        </li>
-      </ul>
-    </Wrapper>
-  );
-};
+    //这里只记录了名字,后面要做另一个页面展示logo,然后设置name,再把logo和name放到数组中展示出来
+    const [tags, setTags] = useState<string[]>(['记账', '明细', '图表']);
+    return (
+      <Wrapper>
+        <ul>
+          {tags.map(tag => {
+            return (
+              <li key={tag}>
+                <div>
+                  <Icon name='detail'/>
+                </div>
+                <span>{tag}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </Wrapper>
+    );
+  }
+;
 
 export {TagsSection};

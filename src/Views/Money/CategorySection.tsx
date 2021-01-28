@@ -38,6 +38,7 @@ const Wrapper = styled.section`
     transform: translateY(-50%);
   }
 `;
+
 const CategorySection: React.FC = () => {
   return (
     <Wrapper>
