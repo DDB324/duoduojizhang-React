@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Icon from '../../components/Icon';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 const Wrapper = styled.section`
   background: #f3f3f3;
@@ -72,7 +72,12 @@ const Wrapper = styled.section`
 
 const NumberPadSection: React.FC = () => {
   const [note, setNote] = useState('');
-  console.log(note);
+  const refInput = useRef<HTMLInputElement>(null);
+  const onBlue = () => {
+    if (refInput.current) {
+      setNote(refInput.current.value);
+    }
+  };
   return (
     <Wrapper>
       <div className='NoteAndOutput'>
@@ -80,8 +85,9 @@ const NumberPadSection: React.FC = () => {
           <Icon name='money'/>
           <span>备注:</span>
           <input type="text" placeholder='点击写备注...'
-                 value={note}
-                 onChange={e => setNote(e.target.value)}
+                 defaultValue={note}
+                 ref={refInput}
+                 onBlur={onBlue}
           />
         </label>
         <div className='output'>
