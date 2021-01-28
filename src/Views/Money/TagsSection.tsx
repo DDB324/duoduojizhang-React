@@ -45,6 +45,12 @@ const Wrapper = styled.section`
 const TagsSection: React.FC = () => {
     //这里只记录了名字,后面要做另一个页面展示logo,然后设置name,再把logo和name放到数组中展示出来
     const [tags, setTags] = useState<string[]>(['记账', '明细', '图表']);
+    const addTag = () => {
+      const tagName = window.prompt('你要增加的标签的名字为?');
+      if (tagName !== null) {
+        setTags([...tags, tagName]);
+      }
+    };
     return (
       <Wrapper>
         <ul>
@@ -58,6 +64,12 @@ const TagsSection: React.FC = () => {
               </li>
             );
           })}
+          <li onClick={addTag}>
+            <div>
+              <Icon name='money'/>
+            </div>
+            <span>新增标签</span>
+          </li>
         </ul>
       </Wrapper>
     );
