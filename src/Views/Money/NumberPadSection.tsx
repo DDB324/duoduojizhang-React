@@ -78,6 +78,46 @@ const NumberPadSection: React.FC = () => {
       setNote(refInput.current.value);
     }
   };
+
+  const [output, setOutput] = useState('0');
+  const onClickButtonWrapper = (e: React.MouseEvent) => {
+    const text = (e.target as HTMLButtonElement).innerHTML;
+    if (text === null) return;
+    switch (text) {
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+      case '.':
+        if (output === '0') {
+          setOutput(text);
+        } else {
+          setOutput(output + text);
+        }
+        break;
+      case '删除':
+        console.log('删除');
+        break;
+      case '+':
+      case '-':
+        console.log('符号');
+        break;
+      case '日期':
+        console.log('日期');
+        break;
+      case '完成':
+        console.log('完成');
+        break;
+      default:
+        console.log('找不到');
+    }
+  };
   return (
     <Wrapper>
       <div className='NoteAndOutput'>
@@ -91,10 +131,10 @@ const NumberPadSection: React.FC = () => {
           />
         </label>
         <div className='output'>
-          <span>100</span>
+          <span>{output}</span>
         </div>
       </div>
-      <div className='pad'>
+      <div className='pad' onClick={onClickButtonWrapper}>
         <button>7</button>
         <button>8</button>
         <button>9</button>
