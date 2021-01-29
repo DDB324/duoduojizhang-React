@@ -66,6 +66,10 @@ const Wrapper = styled.section`
       &:nth-child(12), &:nth-child(16) {
         border-right: none;
       }
+
+      &.ok {
+        background: #ffda43;
+      }
     }
   }
 `;
@@ -78,35 +82,62 @@ const NumberPadSection: React.FC = () => {
       setNote(refInput.current.value);
     }
   };
-
-  const [output, setOutput] = useState('0');
+  const [output, _setOutput] = useState('0');
+  //总长度不能超过16
+  const setOutput = (output: string) => {
+    if (output.length > 16) {
+      output = output.slice(0, 16);
+    }
+    _setOutput(output);
+  };
+  const [complete, setComplete] = useState<'完成' | '='>('完成');
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).innerHTML;
     if (text === null) return;
     switch (text) {
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-      case '.':
+      case '+':
+      case '-':
+        setComplete('完成');
         if (output === '0') {
-          setOutput(text);
+          setOutput('0' + text);
+        } else if (output.indexOf('+') >= 0) {
+          if ((text === '+' || text === '-') && (output.slice(-1) === '+' || output.slice(-1) === '-')) {
+            setOutput(output.slice(0, -1) + text);
+          } else {
+            const numbers = output.split('+');
+            const string = (parseFloat(numbers[0]) + parseFloat(numbers[1])).toString();
+            setOutput(string + text);
+          }
+        } else if (output.indexOf('-') >= 0) {
+          if (text === '+' || text === '-') {
+            setOutput(output.slice(0, -1) + text);
+          } else {
+            const numbers = output.split('-');
+            const string = (parseFloat(numbers[0]) - parseFloat(numbers[1])).toString();
+            setOutput(string + text);
+          }
         } else {
           setOutput(output + text);
         }
         break;
-      case '删除':
-        console.log('删除');
-        break;
-      case '+':
-      case '-':
-        console.log('符号');
+      case '.':
+        //有'+''-',截取'+''-'后面的内容,如果内容里没有'.',就增加'.'
+        if (output.indexOf('+') >= 0 || output.indexOf('-') >= 0) {
+          let number;
+          if (output.indexOf('+') >= 0) {
+            number = output.split('+');
+          } else if (output.indexOf('-') >= 0) {
+            number = output.split('-');
+          }
+          if (number && number[1] && number[1].indexOf(text) < 0) {
+            setOutput(output + text);
+          }
+        } else {
+          //字符串中没有'+''-',如果字符串没有'.',就增加'.'
+          if (output.indexOf(text) < 0) {
+            setOutput(output + text);
+          }
+        }
         break;
       case '日期':
         console.log('日期');
@@ -114,8 +145,37 @@ const NumberPadSection: React.FC = () => {
       case '完成':
         console.log('完成');
         break;
+      case '=':
+        let result = '0';
+        if (output.indexOf('+') >= 0) {
+          const numbers = output.split('+');
+          result = (parseFloat(numbers[0]) + parseFloat(numbers[1])).toString();
+        } else if (output.indexOf('-') >= 0) {
+          const numbers = output.split('-');
+          result = (parseFloat(numbers[0]) - parseFloat(numbers[1])).toString();
+        }
+        setComplete('完成');
+        setOutput(result);
+        break;
+      case '删除':
+        if (output.slice(0, -1).slice(-1) === '+' || output.slice(0, -1).slice(-1) === '+') {
+          setComplete('完成');
+        }
+        if (output.length === 1) {
+          setOutput('0');
+        } else {
+          setOutput(output.slice(0, -1));
+        }
+        break;
       default:
-        console.log('找不到');
+        if (output === '0') {
+          setOutput(text);
+        } else {
+          if (output.indexOf('+') >= 0 || output.indexOf('-') >= 0) {
+            setComplete('=');
+          }
+          setOutput(output + text);
+        }
     }
   };
   return (
@@ -150,7 +210,7 @@ const NumberPadSection: React.FC = () => {
         <button>.</button>
         <button>0</button>
         <button>删除</button>
-        <button>完成</button>
+        <button className='ok'>{complete}</button>
       </div>
     </Wrapper>
   );
