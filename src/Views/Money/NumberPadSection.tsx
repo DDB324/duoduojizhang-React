@@ -94,88 +94,71 @@ const NumberPadSection: React.FC = () => {
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).innerHTML;
     if (text === null) return;
+    const existPlus = output.indexOf('+') >= 0;
+    const existMinus = output.indexOf('-') >= 0;
+    const existPlusOrMinus = existPlus || existMinus;
+    const arrayPlus = output.split('+');
+    const arrayMinus = output.split('-');
+    const removeLastCharacter = output.slice(0, -1);
+    const plus = (numbers: string[]) => {
+      return (parseFloat(numbers[0]) + parseFloat(numbers[1])).toString();
+    };
+    const minus = (numbers: string[]) => {
+      return (parseFloat(numbers[0]) - parseFloat(numbers[1])).toString();
+    };
+    const computeResult = () => {
+      return existPlus ? plus(arrayPlus) : minus(arrayMinus);
+    };
     switch (text) {
       case '+':
       case '-':
         setComplete('完成');
-        if (output === '0') {
-          setOutput('0' + text);
-        } else if (output.indexOf('+') >= 0) {
-          if ((text === '+' || text === '-') && (output.slice(-1) === '+' || output.slice(-1) === '-')) {
-            setOutput(output.slice(0, -1) + text);
-          } else {
-            const numbers = output.split('+');
-            const string = (parseFloat(numbers[0]) + parseFloat(numbers[1])).toString();
-            setOutput(string + text);
-          }
-        } else if (output.indexOf('-') >= 0) {
-          if (text === '+' || text === '-') {
-            setOutput(output.slice(0, -1) + text);
-          } else {
-            const numbers = output.split('-');
-            const string = (parseFloat(numbers[0]) - parseFloat(numbers[1])).toString();
-            setOutput(string + text);
-          }
-        } else {
-          setOutput(output + text);
-        }
+        const lastCharacter = () => output.slice(-1);
+        const lastCharacterPlusOrMinus = () => {
+          return lastCharacter() === '+' || lastCharacter() === '-';
+        };
+        const lastCharacterPlusOrMinusResult = () => {
+          return lastCharacterPlusOrMinus() ? removeLastCharacter : computeResult();
+        };
+        const existPlusOrMinusResult = existPlusOrMinus ? lastCharacterPlusOrMinusResult() : output;
+        setOutput(existPlusOrMinusResult + text);
         break;
       case '.':
-        //有'+''-',截取'+''-'后面的内容,如果内容里没有'.',就增加'.'
-        if (output.indexOf('+') >= 0 || output.indexOf('-') >= 0) {
-          let number;
-          if (output.indexOf('+') >= 0) {
-            number = output.split('+');
-          } else if (output.indexOf('-') >= 0) {
-            number = output.split('-');
-          }
-          if (number && number[1] && number[1].indexOf(text) < 0) {
-            setOutput(output + text);
-          }
-        } else {
-          //字符串中没有'+''-',如果字符串没有'.',就增加'.'
-          if (output.indexOf(text) < 0) {
-            setOutput(output + text);
-          }
+        const number = existPlus ? arrayPlus : arrayMinus;
+        const secondNumberHasNoPoint = () => {
+          return number && number[1] && number[1].indexOf(text) < 0;
+        };
+        const outputHasNoPoint = () => {
+          return output.indexOf(text) < 0;
+        };
+        if ((existPlusOrMinus && secondNumberHasNoPoint()) || outputHasNoPoint()) {
+          setOutput(output + text);
         }
         break;
       case '日期':
         console.log('日期');
         break;
       case '完成':
+        setOutput('0');
         console.log('完成');
         break;
       case '=':
-        let result = '0';
-        if (output.indexOf('+') >= 0) {
-          const numbers = output.split('+');
-          result = (parseFloat(numbers[0]) + parseFloat(numbers[1])).toString();
-        } else if (output.indexOf('-') >= 0) {
-          const numbers = output.split('-');
-          result = (parseFloat(numbers[0]) - parseFloat(numbers[1])).toString();
-        }
         setComplete('完成');
-        setOutput(result);
+        setOutput(computeResult());
         break;
       case '删除':
-        if (output.slice(0, -1).slice(-1) === '+' || output.slice(0, -1).slice(-1) === '+') {
+        //删除最后一个字符后的最后一个字符是否为'+'或'-'
+        const last = removeLastCharacter.slice(-1) === '+' || removeLastCharacter.slice(-1) === '-';
+        if (last) {
           setComplete('完成');
         }
-        if (output.length === 1) {
-          setOutput('0');
-        } else {
-          setOutput(output.slice(0, -1));
-        }
+        setOutput(output.length === 1 ? '0' : removeLastCharacter);
         break;
       default:
-        if (output === '0') {
-          setOutput(text);
-        } else {
-          if (output.indexOf('+') >= 0 || output.indexOf('-') >= 0) {
-            setComplete('=');
-          }
-          setOutput(output + text);
+        if (existPlusOrMinus) {
+          setComplete('=');
         }
+        setOutput((output === '0' ? '' : output) + text);
     }
   };
   return (
