@@ -24,6 +24,12 @@ const Money = () => {
     note: '',
     amount: 0
   });
+  const onChange = (obj: Partial<typeof selected>) => {
+    setSelected({
+      ...selected,
+      ...obj
+    });
+  };
   return (
     <Wrapper>
       {selected.category}
@@ -34,29 +40,15 @@ const Money = () => {
       <hr/>
       {selected.amount}
       <CategorySection category={selected.category}
-                       onCategoryChange={(category) => setSelected({
-                         ...selected,
-                         category
-                       })}/>
+                       onCategoryChange={(category) => onChange({category})}/>
       <Main>
         <TagsSection selectedTag={selected.selectedTag}
-                     onTagChange={(selectedTag: string[]) => setSelected({
-                       ...selected,
-                       selectedTag
-                     })}
-        />
+                     onTagChange={(selectedTag: string[]) => onChange({selectedTag})}/>
       </Main>
       <NumberPadSection note={selected.note}
-                        onNoteChange={(note: string) => setSelected({
-                          ...selected,
-                          note
-                        })}
+                        onNoteChange={(note: string) => onChange({note})}
                         amount={selected.amount}
-                        onAmountChange={(amount) => setSelected({
-                          ...selected,
-                          amount
-                        })}
-      />
+                        onAmountChange={(amount) => onChange({amount})}/>
     </Wrapper>
   );
 };
