@@ -41,10 +41,14 @@ const Wrapper = styled.section`
     }
   }
 `;
-
-const TagsSection: React.FC = () => {
-    const [selectedTag, setSelectedTag] = useState<string[]>([]);
+type Props = {
+  selectedTag: string[]
+  onTagChange: (selectedTag: string[]) => void
+}
+const TagsSection: React.FC<Props> = (props) => {
+    const selectedTag = props.selectedTag;
     //这里只记录了名字,后面要做另一个页面展示logo,然后设置name,再把logo和name放到数组中展示出来
+    //TODO
     const [tags, setTags] = useState<string[]>(['记账', '明细', '图表']);
     const addTag = () => {
       const tagName = window.prompt('你要增加的标签的名字为?');
@@ -55,9 +59,9 @@ const TagsSection: React.FC = () => {
     const onToggleTag = (tag: string) => {
       const index = selectedTag?.indexOf(tag);
       if (index >= 0) {
-        setSelectedTag([]);
+        props.onTagChange([]);
       } else {
-        setSelectedTag([tag]);
+        props.onTagChange([tag]);
       }
     };
     const getClass = (tag: string) => selectedTag?.indexOf(tag) >= 0 ? 'selected' : '';

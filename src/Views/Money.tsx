@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {CategorySection} from './Money/CategorySection';
 import {TagsSection} from './Money/TagsSection';
@@ -15,14 +15,48 @@ const Main = styled.div`
   overflow: auto;
 `;
 
+type Category = '-' | '+';
+
 const Money = () => {
+  const [selected, setSelected] = useState({
+    category: '-' as Category,
+    selectedTag: [] as string[],
+    note: '',
+    amount: 0
+  });
   return (
     <Wrapper>
-      <CategorySection/>
+      {selected.category}
+      <hr/>
+      {selected.selectedTag}
+      <hr/>
+      {selected.note}
+      <hr/>
+      {selected.amount}
+      <CategorySection category={selected.category}
+                       onCategoryChange={(category) => setSelected({
+                         ...selected,
+                         category
+                       })}/>
       <Main>
-        <TagsSection/>
+        <TagsSection selectedTag={selected.selectedTag}
+                     onTagChange={(selectedTag: string[]) => setSelected({
+                       ...selected,
+                       selectedTag
+                     })}
+        />
       </Main>
-      <NumberPadSection/>
+      <NumberPadSection note={selected.note}
+                        onNoteChange={(note: string) => setSelected({
+                          ...selected,
+                          note
+                        })}
+                        amount={selected.amount}
+                        onAmountChange={(amount) => setSelected({
+                          ...selected,
+                          amount
+                        })}
+      />
     </Wrapper>
   );
 };
