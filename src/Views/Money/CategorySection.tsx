@@ -38,23 +38,30 @@ const Wrapper = styled.section`
     transform: translateY(-50%);
   }
 `;
-
+type Category = '-' | '+';
 type Props = {
-  category: string
-  onCategoryChange: (category: '+' | '-') => void
+  category: Category
+  onCategoryChange: (category: Category, selectedTag: string[]) => void
 }
 const CategorySection: React.FC<Props> = (props) => {
   const categoryMap = {'-': '支出', '+': '收入'};
   type Keys = keyof typeof categoryMap
   const category = props.category;
   const [categoryList] = useState<Keys[]>(['-', '+']);
+  const onToggleCategory = (e: React.MouseEvent, c: Category) => {
+    //防止多次点击同一个category造成函数多次执行
+    if (e.currentTarget.querySelector('span')?.innerHTML !== categoryMap[category]) {
+      return props.onCategoryChange(c, []);
+    }
+  };
   return (
     <Wrapper>
       <ul>
         {
           categoryList.map(c => {
               return (
-                <li key={c} onClick={() => props.onCategoryChange(c)}>
+                <li key={c}
+                    onClick={(e) => onToggleCategory(e, c)}>
                   <span className={category === c ? 'selected' : ''}>
                     {categoryMap[c]}
                   </span>
