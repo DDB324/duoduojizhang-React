@@ -10,4 +10,4 @@ const Chart = () => {
   );
 };
 
-export default Chart;
+export {Chart};

@@ -76,4 +76,4 @@ const Money = () => {
   );
 };
 
-export default Money;
+export {Money};
