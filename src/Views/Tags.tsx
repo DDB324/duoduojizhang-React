@@ -58,6 +58,12 @@ const Main = styled.div`
       > span {
         margin-right: auto;
       }
+
+      > button {
+        padding: 4px 12px;
+        background: #ed736e;
+        color: white;
+      }
     }
   }
 `;
@@ -82,7 +88,7 @@ const Tags: React.FC = () => {
                     <Icon name={tag.chart}/>
                   </div>
                   <span>{tag.name}</span>
-                  <Icon name='right'/>
+                  <button>删除</button>
                 </li>
               );
             })
