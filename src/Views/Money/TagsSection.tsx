@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Icon from '../../components/Icon';
-import React, {ReactHTMLElement, ReactNode, ReactNodeArray, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {Link} from 'react-router-dom';
 
 const Wrapper = styled.section`
@@ -63,7 +63,7 @@ const TagsSection: React.FC<Props> = (props) => {
     const getClass = (tag: string) => selectedTag?.indexOf(tag) >= 0 ? 'selected' : '';
     const textLink = useRef(null);
     const handleClick = () => {
-        (textLink.current! as HTMLElement).click();
+      (textLink.current! as HTMLElement).click();
     };
     return (
       <Wrapper>
