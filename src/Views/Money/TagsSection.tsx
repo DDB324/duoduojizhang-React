@@ -83,7 +83,7 @@ const TagsSection: React.FC<Props> = (props) => {
               <Icon name='money'/>
             </div>
             <span>新增标签</span>
-            <Link ref={textLink} to={'/tags/edit'}/>
+            <Link ref={textLink} to={'/tags'}/>
           </li>
         </ul>
       </Wrapper>

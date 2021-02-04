@@ -4,7 +4,7 @@ import {NoMatch} from './Views/NoMatch';
 import {Money} from './Views/Money';
 import {Detail} from './Views/Detail';
 import {Chart} from './Views/Chart';
-import {TagsEdit} from './Views/TagsEdit';
+import {Tags} from './Views/Tags';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
         <Route exact path="/money">
           <Money/>
         </Route>
-        <Route exact path="/tags/edit">
-          <TagsEdit/>
+        <Route exact path="/tags">
+          <Tags/>
         </Route>
         <Redirect exact from="/" to="/detail"/>
         <Route path="*">

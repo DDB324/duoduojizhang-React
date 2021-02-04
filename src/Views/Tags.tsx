@@ -1,9 +1,9 @@
 import React from 'react';
 
-const TagsEdit:React.FC = ()=>{
+const Tags:React.FC = ()=>{
   return (
     <div>TagsEdit</div>
   )
 }
 
-export {TagsEdit}
+export {Tags}
