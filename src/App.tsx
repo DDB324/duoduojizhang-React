@@ -5,6 +5,7 @@ import {Money} from './Views/Money';
 import {Detail} from './Views/Detail';
 import {Chart} from './Views/Chart';
 import {Tags} from './Views/Tags';
+import {AddTag} from './Views/AddTag';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         </Route>
         <Route exact path="/tags">
           <Tags/>
+        </Route>
+        <Route exact path="/addTag">
+          <AddTag/>
         </Route>
         <Redirect exact from="/" to="/detail"/>
         <Route path="*">

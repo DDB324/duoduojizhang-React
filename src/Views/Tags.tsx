@@ -3,6 +3,7 @@ import {useTags} from '../useTags';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
 import {CategorySettings} from './CategorySettings';
+import {Link} from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,8 +15,10 @@ const Wrapper = styled.div`
     text-align: center;
     box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, .25);
 
-    > .icon {
-      margin: 0 4px;
+    > a {
+      .icon {
+        margin: 0 4px;
+      }
     }
   }
 `;
@@ -122,8 +125,10 @@ const Tags: React.FC = () => {
         </ul>
       </Main>
       <footer>
-        <Icon name='add'/>
-        {category === '-' ? '添加支出标签' : '添加收入标签'}
+        <Link to={'/addTag'}>
+          <Icon name='add'/>
+          {category === '-' ? '添加支出标签' : '添加收入标签'}
+        </Link>
       </footer>
     </Wrapper>
   );
