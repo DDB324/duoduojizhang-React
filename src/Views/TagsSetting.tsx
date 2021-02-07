@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {useTags} from '../useTags';
-import Icon from '../components/Icon';
+import {useTags} from 'useTags';
+import Icon from 'components/Icon';
 import styled from 'styled-components';
-import {CategorySettings} from './CategorySettings';
+import {CategorySetting} from './TagsSetting/CategorySetting';
 import {Link} from 'react-router-dom';
 
+//可以查看所有标签和删除标签的页面
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -77,7 +78,7 @@ type Tag = {
   name: string
 }
 
-const Tags: React.FC = () => {
+const TagsSetting: React.FC = () => {
   //获取tag数据
   const {expenditureTags, incomeTags, setExpenditureTags, setIncomeTags} = useTags();
 
@@ -105,8 +106,8 @@ const Tags: React.FC = () => {
   };
   return (
     <Wrapper>
-      <CategorySettings category={category}
-                        onCategoryChange={(category) => {setCategory(category);}}/>
+      <CategorySetting category={category}
+                       onCategoryChange={(category) => {setCategory(category);}}/>
       <Main>
         <ul>
           {
@@ -134,4 +135,4 @@ const Tags: React.FC = () => {
   );
 };
 
-export {Tags};
+export {TagsSetting};

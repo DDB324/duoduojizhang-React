@@ -1,8 +1,9 @@
-import Icon from '../../components/Icon';
+import Icon from 'components/Icon';
 import React, {useRef, useState} from 'react';
-import {Wrapper} from './NumberPadSection/Wrapper';
+import {WrapperNumberPad} from './NumberPadSection/WrapperNumberPad';
 import NP from 'number-precision';
 
+//显示记账页面的数字面板的内容
 type Props = {
   note: string
   amount: number
@@ -118,7 +119,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     }
   };
   return (
-    <Wrapper>
+    <WrapperNumberPad>
       <div className='NoteAndOutput'>
         <label>
           <Icon name='money'/>
@@ -151,7 +152,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
         <button>删除</button>
         <button className='ok'>{complete}</button>
       </div>
-    </Wrapper>
+    </WrapperNumberPad>
   );
 };
 export {NumberPadSection};

@@ -1,5 +1,6 @@
 import React from 'react';
 
+//封装的使用icon的组件
 const importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
 try {importAll(require.context('icons', true, /\.svg$/));} catch (error) {console.log(error);}
 

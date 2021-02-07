@@ -36,4 +36,4 @@ const NavIconLink = (props: Props) => {
   );
 };
 
-export default NavIconLink;
+export {NavIconLink};

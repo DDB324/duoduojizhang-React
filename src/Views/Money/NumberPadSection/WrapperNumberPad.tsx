@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.section`
+//抽离的数字面板的样式
+const WrapperNumberPad = styled.section`
   background: #f3f3f3;
 
   > .NoteAndOutput {
@@ -71,4 +72,4 @@ const Wrapper = styled.section`
     }
   }
 `;
-export {Wrapper}
+export {WrapperNumberPad}

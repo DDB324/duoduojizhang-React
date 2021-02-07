@@ -1,20 +1,10 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
 import {CategorySection} from './Money/CategorySection';
 import {TagsSection} from './Money/TagsSection';
 import {NumberPadSection} from './Money/NumberPadSection';
 import {useTags} from '../useTags';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  position: relative;
-`;
-const Main = styled.div`
-  flex-grow: 1;
-  overflow: auto;
-`;
+import {WrapperLayout} from 'components/Layout/WrapperLayout';
+import {MainLayout} from 'components/Layout/MainLayout';
 
 type Category = '-' | '+';
 
@@ -39,7 +29,7 @@ const Money = () => {
   };
 
   return (
-    <Wrapper>
+    <WrapperLayout>
       {'category: ' + selected.category}
       <hr/>
       {'selectedTagId: ' + selected.selectedTagId}
@@ -50,11 +40,11 @@ const Money = () => {
       <CategorySection category={selected.category}
                        onCategoryChange={(category, selectedTagId) =>
                          onChange({category: category, selectedTagId: selectedTagId})}/>
-      <Main>
+      <MainLayout>
         <TagsSection selectedTagId={selected.selectedTagId}
                      onTagChange={(selectedTagId: number[]) => onChange({selectedTagId})}
                      tags={selected.category === '-' ? expenditureTags : incomeTags}/>
-      </Main>
+      </MainLayout>
       {
         selected.selectedTagId.length > 0 &&
         <NumberPadSection note={selected.note}
@@ -62,7 +52,7 @@ const Money = () => {
                           amount={selected.amount}
                           onAmountChange={(amount) => onChange({amount})}/>
       }
-    </Wrapper>
+    </WrapperLayout>
   );
 };
 

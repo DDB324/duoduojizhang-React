@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
-import NavLink from './NavIconLink';
+import {NavIconLink} from './NavIconLink';
+// import {NavLink} from 'react-router-dom';
 
+//3个主页面下面的导航栏的3个按钮
 const NavUl = styled.ul`
   box-shadow: 0 0 3px rgba(0, 0, 0, .25);
   line-height: 24px;
@@ -9,7 +11,7 @@ const NavUl = styled.ul`
 
   > li {
     width: 33.3%;
-    padding: 4px 0;
+    padding: 8px 0 4px;
   }
 `;
 
@@ -17,13 +19,13 @@ const Nav = () => {
   return (
     <NavUl>
       <li>
-        <NavLink name='detail' text='明细'/>
+        <NavIconLink name='detail' text='明细'/>
       </li>
       <li>
-        <NavLink name='money' text='记账'/>
+        <NavIconLink name='money' text='记账'/>
       </li>
       <li>
-        <NavLink name='chart' text='图表'/>
+        <NavIconLink name='chart' text='图表'/>
       </li>
     </NavUl>
   );

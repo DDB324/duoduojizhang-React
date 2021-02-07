@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
 
+//记账页面上面的导航栏,切换收入支出
 const Wrapper = styled.section`
   background: #ffda43;
   position: relative;

@@ -1,38 +1,10 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
-import Icon from '../components/Icon';
+import {TopBar} from './CategorySetting/TopBar';
 
-//样式
+//在删除标签页面中切换收入和支出标签的页面
 const Wrapper = styled.section`
   background: #ffda43;
-  position: relative;
-
-  > header {
-    padding: 12px 4px 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    > .left {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      > .icon {
-        width: 24px;
-        height: 24px;
-      }
-    }
-
-    > .center {
-      font-size: 1.4em;
-    }
-
-    > .right {
-      width: 56px;
-      height: 24px;
-    }
-  }
 
   > ul {
     display: flex;
@@ -45,7 +17,6 @@ const Wrapper = styled.section`
       width: 35%;
       border: 1px solid #333132;
       padding: 4px 0;
-      position: relative;
 
       &:first-child {
         border-top-left-radius: 4px;
@@ -72,7 +43,7 @@ type Props = {
   onCategoryChange: (category: Category) => void
 }
 
-const CategorySettings: React.FC<Props> = (props) => {
+const CategorySetting: React.FC<Props> = (props) => {
   //接受的外部数据
   const category = props.category;
 
@@ -93,16 +64,9 @@ const CategorySettings: React.FC<Props> = (props) => {
   };
   return (
     <Wrapper>
-      <header>
-        <div className='left'>
-          <Icon name='left'/>
-          返回
-        </div>
-        <div className='center'>
-          标签设置
-        </div>
-        <div className='right'/>
-      </header>
+      <TopBar leftChart='left' leftName='返回'
+              centerName='标签设置'
+              rightChart='' rightName=''/>
       <ul>
         {
           categoryList.map(c => {
@@ -122,4 +86,4 @@ const CategorySettings: React.FC<Props> = (props) => {
 };
 
 
-export {CategorySettings};
+export {CategorySetting};

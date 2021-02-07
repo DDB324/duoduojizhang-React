@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import Icon from '../../components/Icon';
+import Icon from 'components/Icon';
 import React, {useRef} from 'react';
 import {Link} from 'react-router-dom';
 
+//记账页面显示所有标签和新增标签按钮的内容
 const Wrapper = styled.section`
   padding: 12px 20px 0;
   overflow: auto;
