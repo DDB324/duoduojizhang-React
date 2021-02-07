@@ -19,38 +19,44 @@ const Main = styled.div`
 type Category = '-' | '+';
 
 const Money = () => {
+  //获取的tags
   const {incomeTags, expenditureTags} = useTags();
+
+  //储存数据
   const [selected, setSelected] = useState({
     category: '-' as Category,
-    selectedTag: [] as string[],
+    selectedTagId: [] as number[],
     note: '',
     amount: 0
   });
+
+  //接受子组件的参数来修改数据
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({
       ...selected,
       ...obj
     });
   };
+
   return (
     <Wrapper>
-      {selected.category}
+      {'category: ' + selected.category}
       <hr/>
-      {selected.selectedTag}
+      {'selectedTagId: ' + selected.selectedTagId}
       <hr/>
-      {selected.note}
+      {'note: ' + selected.note}
       <hr/>
-      {selected.amount}
+      {'amount: ' + selected.amount}
       <CategorySection category={selected.category}
-                       onCategoryChange={(category, selectedTag) =>
-                         onChange({category: category, selectedTag: selectedTag})}/>
+                       onCategoryChange={(category, selectedTagId) =>
+                         onChange({category: category, selectedTagId: selectedTagId})}/>
       <Main>
-        <TagsSection selectedTag={selected.selectedTag}
-                     onTagChange={(selectedTag: string[]) => onChange({selectedTag})}
+        <TagsSection selectedTagId={selected.selectedTagId}
+                     onTagChange={(selectedTagId: number[]) => onChange({selectedTagId})}
                      tags={selected.category === '-' ? expenditureTags : incomeTags}/>
       </Main>
       {
-        selected.selectedTag.length > 0 &&
+        selected.selectedTagId.length > 0 &&
         <NumberPadSection note={selected.note}
                           onNoteChange={(note: string) => onChange({note})}
                           amount={selected.amount}

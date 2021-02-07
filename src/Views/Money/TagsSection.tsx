@@ -43,35 +43,45 @@ const Wrapper = styled.section`
   }
 `;
 type Props = {
-  selectedTag: string[]
-  onTagChange: (selectedTag: string[]) => void
-  tags: { chart: string, name: string }[]
+  selectedTagId: number[]
+  onTagChange: (selectedTagId: number[]) => void
+  tags: { id: number, chart: string, name: string }[]
 }
 const TagsSection: React.FC<Props> = (props) => {
-    const selectedTag = props.selectedTag;
-    //这里只记录了名字,后面要做另一个页面展示logo,然后设置name,再把logo和name放到数组中展示出来
-    //TODO
+    //被选取的tag
+    const selectedTagId = props.selectedTagId;
+
+    //获取到的tags
     const tags = props.tags;
-    const onToggleTag = (tag: string) => {
-      const index = selectedTag?.indexOf(tag);
+
+    //切换选择的tag并传到组件外面
+    const onToggleTag = (tagId: number) => {
+      const index = selectedTagId?.indexOf(tagId);
       if (index >= 0) {
         props.onTagChange([]);
       } else {
-        props.onTagChange([tag]);
+        props.onTagChange([tagId]);
       }
     };
-    const getClass = (tag: string) => selectedTag?.indexOf(tag) >= 0 ? 'selected' : '';
+
+    //修改被选中的tag的背景
+    const getClass = (tagId: number) => selectedTagId?.indexOf(tagId) >= 0 ? 'selected' : '';
+
+    //获取Link元素
     const textLink = useRef(null);
+
+    //点击新增标签之后模拟点击Link标签触发a标签
     const handleClick = () => {
       (textLink.current! as HTMLElement).click();
     };
+
     return (
       <Wrapper>
         <ul>
           {tags.map(tag => {
             return (
-              <li key={tag.chart} onClick={() => onToggleTag(tag.chart)}>
-                <div className={getClass(tag.chart)}>
+              <li key={tag.id} onClick={() => onToggleTag(tag.id)}>
+                <div className={getClass(tag.id)}>
                   <Icon name={tag.chart}/>
                 </div>
                 <span>{tag.name}</span>
