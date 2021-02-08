@@ -10,33 +10,6 @@ const WrapperNumberPad = styled.section`
     border-top: 1px solid #cccccc;
     justify-content: space-between;
 
-
-    > label {
-      display: flex;
-      align-items: center;
-      justify-content: right;
-      flex-grow: 1;
-
-      > .icon {
-        width: 1.2em;
-        height: 1.2em;
-        margin: 0 4px;
-      }
-
-      > span {
-        margin-right: 8px;
-        white-space: nowrap;
-      }
-
-      > input {
-        height: 48px;
-        background: none;
-        font-size: inherit;
-        flex-grow: 1;
-        width: 0;
-      }
-    }
-
     > .output {
       padding-right: 12px;
       font-size: 30px;
@@ -72,4 +45,4 @@ const WrapperNumberPad = styled.section`
     }
   }
 `;
-export {WrapperNumberPad}
+export {WrapperNumberPad};

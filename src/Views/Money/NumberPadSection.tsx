@@ -2,6 +2,7 @@ import Icon from 'components/Icon';
 import React, {useRef, useState} from 'react';
 import {WrapperNumberPad} from './NumberPadSection/WrapperNumberPad';
 import NP from 'number-precision';
+import {Input} from '../../components/Input';
 
 //显示记账页面的数字面板的内容
 type Props = {
@@ -121,15 +122,16 @@ const NumberPadSection: React.FC<Props> = (props) => {
   return (
     <WrapperNumberPad>
       <div className='NoteAndOutput'>
-        <label>
-          <Icon name='money'/>
-          <span>备注:</span>
-          <input type="text" placeholder='点击写备注...'
-                 defaultValue={note}
-                 ref={refInput}
-                 onBlur={onBlue}
-          />
-        </label>
+        {/*<label>*/}
+        {/*  <Icon name='money'/>*/}
+        {/*  <span>备注:</span>*/}
+        {/*<input type="text" placeholder='点击写备注...'*/}
+        {/*       defaultValue={note}*/}
+        {/*       ref={refInput}*/}
+        {/*       onBlur={onBlue}*/}
+        {/*/>*/}
+        {/*</label>*/}
+        <Input/>
         <div className='output'>
           <span>{output}</span>
         </div>
