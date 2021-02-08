@@ -6,42 +6,12 @@ import Icon from '../components/Icon';
 // import {useTags} from '../useTags';
 import {amusementTags, foodTags, shoppingTags, studyTags, trafficTags} from '../allIcon';
 import styled from 'styled-components';
+import {Input} from '../components/Input';
 
 //新增标签的页面
-const AddTagName = styled.div`
+const InputWrapper = styled.div`
   padding: 4px 12px;
   border-bottom: 1px solid #eaeaea;
-  
-  > label {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    > div {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-bottom: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #ffda43;
-
-      > .icon {
-        width: 30px;
-        height: 30px;
-      }
-    }
-
-    > input {
-      margin-left: 16px;
-      height: 48px;
-      background: none;
-      font-size: inherit;
-      flex-grow: 1;
-    }
-
-  }
 `;
 
 const Section = styled.section`
@@ -96,15 +66,11 @@ const AddTag: React.FC = () => {
       <TopBar leftChart='left' leftName='返回'
               centerName='添加支出类别'
               rightChart='' rightName='完成'/>
-      <AddTagName>
-        <label>
-          <div>
-            <Icon name='diannao'/>
-          </div>
-          <input type="text" placeholder='输入标签名称(不超过4个汉字)'
-          />
-        </label>
-      </AddTagName>
+      <InputWrapper>
+        <Input iconName='diannao' type='text'
+               placeholder='输入标签名称(不超过4个汉字)' value=''
+               onChange={() => {}}/>
+      </InputWrapper>
       <MainLayout>
         {
           categoryList.map(category => {
