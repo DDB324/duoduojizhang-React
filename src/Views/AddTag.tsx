@@ -9,12 +9,13 @@ import styled from 'styled-components';
 
 //新增标签的页面
 const AddTagName = styled.div`
+  padding: 4px 12px;
+  border-bottom: 1px solid #eaeaea;
+  
   > label {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 4px 12px;
-    border-bottom: 1px solid #eaeaea;
 
     > div {
       width: 40px;

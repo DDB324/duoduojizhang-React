@@ -1,8 +1,8 @@
-import Icon from 'components/Icon';
-import React, {useRef, useState} from 'react';
+import React, {ChangeEventHandler, useState} from 'react';
 import {WrapperNumberPad} from './NumberPadSection/WrapperNumberPad';
 import NP from 'number-precision';
 import {Input} from '../../components/Input';
+import {useTags} from '../../useTags';
 
 //显示记账页面的数字面板的内容
 type Props = {
@@ -10,28 +10,37 @@ type Props = {
   amount: number
   onNoteChange: (note: string) => void
   onAmountChange: (amount: number) => void
+  selectedTagId: number[]
 }
 const NumberPadSection: React.FC<Props> = (props) => {
-  const note = props.note;
-  const refInput = useRef<HTMLInputElement>(null);
-  const onBlue = () => {
-    if (refInput.current) {
-      props.onNoteChange(refInput.current.value);
-    }
+  //声明外部数据
+  const {note, selectedTagId} = props;
+
+  //找到selectedTagId对应的图表
+  const {incomeTags, expenditureTags} = useTags();
+  const tags = incomeTags.concat(expenditureTags);
+  const selectedTag = tags.filter(tag => tag.id === selectedTagId[0])[0];
+
+  //onChange函数
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    props.onNoteChange(e.target.value);
   };
+
+  //数字面板计算后输出的内容,总长度不能超过16
   const [output, _setOutput] = useState(props.amount.toString());
-  // const output = props.amount.toString();
-  //总长度不能超过16
   const setOutput = (output: string) => {
     if (output.length > 16) {
       output = parseFloat(output.slice(0, 16)).toString();
     }
     _setOutput(output);
   };
+
+  //右下角按钮显示的内容
   const [complete, setComplete] = useState<'完成' | '='>('完成');
+
+  //计算逻辑,还需优化
+  //TODO
   const onClickButtonWrapper = (e: React.MouseEvent) => {
-    //计算逻辑还需优化
-    //TODO
     const text = (e.target as HTMLButtonElement).innerHTML;
     if (text === null) return;
     const existPlus = output.indexOf('+') >= 0;
@@ -122,16 +131,9 @@ const NumberPadSection: React.FC<Props> = (props) => {
   return (
     <WrapperNumberPad>
       <div className='NoteAndOutput'>
-        {/*<label>*/}
-        {/*  <Icon name='money'/>*/}
-        {/*  <span>备注:</span>*/}
-        {/*<input type="text" placeholder='点击写备注...'*/}
-        {/*       defaultValue={note}*/}
-        {/*       ref={refInput}*/}
-        {/*       onBlur={onBlue}*/}
-        {/*/>*/}
-        {/*</label>*/}
-        <Input/>
+        <Input iconName={selectedTag.chart} spanContent='备注:' type='text'
+               placeholder='点击写备注...' value={note}
+               onChange={onChange}/>
         <div className='output'>
           <span>{output}</span>
         </div>

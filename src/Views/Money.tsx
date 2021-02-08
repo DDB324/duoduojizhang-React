@@ -50,7 +50,8 @@ const Money = () => {
         <NumberPadSection note={selected.note}
                           onNoteChange={(note: string) => onChange({note})}
                           amount={selected.amount}
-                          onAmountChange={(amount) => onChange({amount})}/>
+                          onAmountChange={(amount) => onChange({amount})}
+                          selectedTagId={selected.selectedTagId}/>
       }
     </WrapperLayout>
   );

@@ -5,13 +5,23 @@ import styled from 'styled-components';
 const Label = styled.label`
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: flex-start;
   flex-grow: 1;
 
-  > .icon {
-    width: 1.2em;
-    height: 1.2em;
-    margin: 0 4px;
+  > div {
+    margin: 0 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffda43;
+
+    > .icon {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   > span {
@@ -28,12 +38,20 @@ const Label = styled.label`
   }
 `;
 
-const Input = () => {
+type Props = {
+  iconName: string,
+  spanContent?: string
+} & React.InputHTMLAttributes<HTMLInputElement>
+
+const Input: React.FC<Props> = (props) => {
+  const {iconName, spanContent, ...rest} = props;
   return (
     <Label>
-      <Icon name='money'/>
-      <span>备注:</span>
-      <input type="text" placeholder='点击写备注...'/>
+      <div>
+        <Icon name={props.iconName}/>
+      </div>
+      {props.spanContent && <span>{props.spanContent}</span>}
+      <input {...rest}/>
     </Label>
   );
 };
