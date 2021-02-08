@@ -8,6 +8,7 @@ const Wrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #ffda43;
 
   > .left {
     display: flex;

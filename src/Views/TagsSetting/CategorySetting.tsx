@@ -4,13 +4,13 @@ import {TopBar} from './CategorySetting/TopBar';
 
 //在删除标签页面中切换收入和支出标签的页面
 const Wrapper = styled.section`
-  background: #ffda43;
 
   > ul {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 8px;
+    background: #ffda43;
 
     > li {
       text-align: center;
