@@ -126,7 +126,7 @@ const TagsSetting: React.FC = () => {
         </ul>
       </Main>
       <footer>
-        <Link to={'/addTag'}>
+        <Link to={category==='-'?'/addExpenditureTag':'/addIncomeTag'}>
           <Icon name='add'/>
           {category === '-' ? '添加支出标签' : '添加收入标签'}
         </Link>

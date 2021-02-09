@@ -24,7 +24,10 @@ function App() {
         <Route exact path="/tags">
           <TagsSetting/>
         </Route>
-        <Route exact path="/addTag">
+        <Route exact path="/addExpenditureTag">
+          <AddTag/>
+        </Route>
+        <Route exact path="/addIncomeTag">
           <AddTag/>
         </Route>
         <Redirect exact from="/" to="/detail"/>

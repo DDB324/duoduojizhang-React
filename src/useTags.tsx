@@ -29,7 +29,29 @@ const defaultExpenditureTags = [
 const useTags = () => {
   const [incomeTags, setIncomeTags] = useState<Tag[]>(defaultIncomeTags);
   const [expenditureTags, setExpenditureTags] = useState<Tag[]>(defaultExpenditureTags);
+  const addTag = (category: '+' | '-', tag: Tag) => {
+    const tags = incomeTags.concat(expenditureTags);
+    if (tags.map(item => item.name).indexOf(tag.name) >= 0) {
+      window.alert('标签名已经存在,请重新输入!');
+    } else if (tag.name === '') {
+      window.alert('标签名不能为空!');
+    } else {
+      if (category === '-') {
+        localStorage.setItem('-', JSON.stringify(tag));
+        // setExpenditureTags([
+        //   ...expenditureTags,
+        //   tag
+        // ]);
+      } else {
+        localStorage.setItem('+', JSON.stringify(tag));
+        // setIncomeTags([
+        //   ...incomeTags,
+        //   tag
+        // ]);
+      }
+    }
+  };
   // return {incomeTags: incomeTags ...}
-  return {incomeTags, setIncomeTags, expenditureTags, setExpenditureTags};
+  return {incomeTags, setIncomeTags, expenditureTags, setExpenditureTags, addTag};
 };
 export {useTags};

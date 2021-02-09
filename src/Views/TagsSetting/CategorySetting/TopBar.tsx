@@ -39,12 +39,13 @@ type Props = {
   leftName: string,
   centerName: string,
   rightChart: string,
-  rightName: string
+  rightName: string,
+  onRight?: () => void
 }
 
 //如果leftName和rightName要填写多个字,需要修改css中.right的width
 const TopBar: React.FC<Props> = (props) => {
-  const {leftChart, leftName, centerName, rightChart, rightName} = props;
+  const {leftChart, leftName, centerName, rightChart, rightName, onRight} = props;
   return (
     <Wrapper>
       <div className='left'>
@@ -54,7 +55,7 @@ const TopBar: React.FC<Props> = (props) => {
       <div className='center'>
         {centerName}
       </div>
-      <div className='right'>
+      <div className='right' onClick={() => onRight ? onRight() : undefined}>
         {rightName}
         <Icon name={rightChart}/>
       </div>

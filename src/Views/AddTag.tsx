@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {ChangeEventHandler, useState} from 'react';
 import {TopBar} from './TagsSetting/CategorySetting/TopBar';
 import {WrapperLayout} from '../components/Layout/WrapperLayout';
 import {MainLayout} from '../components/Layout/MainLayout';
 import Icon from '../components/Icon';
-// import {useTags} from '../useTags';
-import {amusementTags, foodTags, shoppingTags, studyTags, trafficTags} from '../allIcon';
+import {amusementTags, foodTags, shoppingTags, studyTags, trafficTags} from '../allTags';
 import styled from 'styled-components';
 import {Input} from '../components/Input';
+import {useTags} from '../useTags';
+import {createId} from '../lib/createId';
 
 //新增标签的页面
 const InputWrapper = styled.div`
@@ -42,6 +43,10 @@ const Section = styled.section`
         align-items: center;
         background: #f6f5f5;
 
+        &.selected {
+          background: #ffda43;
+        }
+
         > .icon {
           width: 30px;
           height: 30px;
@@ -50,8 +55,21 @@ const Section = styled.section`
     }
   }
 `;
+
 const AddTag: React.FC = () => {
-  // const {expenditureTags} = useTags();
+  //获取路径的hash值决定显示标题是收入还是支出
+  const hash = window.location.hash.split('/')[1] as 'addExpenditureTag' | 'addIncomeTag';
+  const hashMap: { addExpenditureTag: '-', addIncomeTag: '+' } = {addExpenditureTag: '-', addIncomeTag: '+'};
+  const category = hashMap[hash];
+
+  //储存数据
+  const [selected, setSelected] = useState({
+    category,
+    selectedTagChart: 'diannao',
+    tagName: ''
+  });
+
+  //遍历标签数据
   const categoryMap = {
     娱乐: amusementTags,
     食物: foodTags,
@@ -61,15 +79,64 @@ const AddTag: React.FC = () => {
   };
   type Keys = keyof typeof categoryMap
   const categoryList: Keys[] = ['娱乐', '食物', '购物', '学习', '交通'];
+
+  //根据输入内容修改数据中的标签名
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setSelected({
+      ...selected,
+      tagName: e.target.value
+    });
+  };
+
+  //被选择的标签增加selected类
+  const getClass = (tag: string) => selected.selectedTagChart === tag ? 'selected' : '';
+
+  //修改新增标签的图标
+  const onToggleTag = (selectedTagChart: string) => setSelected({...selected, selectedTagChart});
+
+  //生成新标签的函数,数据类型:{id:number,chart:string,name:string}
+  const createNewTag = () => {
+    return {
+      id: createId(),
+      chart: selected.selectedTagChart,
+      name: selected.tagName
+    };
+  };
+
+  //从useTags获取新增标签的函数
+  const {addTag} = useTags();
+
+  //点击完成执行的函数
+  const onComplete = () => {
+    if (selected.tagName.length <= 4) {
+      addTag(category, createNewTag());
+      console.log('成功');
+    } else {
+      alert('标签名称不能超过4个字符,请重新输入');
+    }
+  };
+
+  //封装的遍历标签的jsx
+  const tagItem = (tag: string) => {
+    return (
+      <li key={tag} onClick={() => onToggleTag(tag)}>
+        <div className={getClass(tag)}>
+          <Icon name={tag}/>
+        </div>
+      </li>
+    );
+  };
+
   return (
     <WrapperLayout>
       <TopBar leftChart='left' leftName='返回'
-              centerName='添加支出类别'
-              rightChart='' rightName='完成'/>
+              centerName={category === '-' ? '添加支出标签' : '添加收入标签'}
+              rightChart='' rightName='完成'
+              onRight={onComplete}/>
       <InputWrapper>
-        <Input iconName='diannao' type='text'
-               placeholder='输入标签名称(不超过4个汉字)' value=''
-               onChange={() => {}}/>
+        <Input iconName={selected.selectedTagChart} type='text'
+               placeholder='输入标签名称(不超过4个汉字)' value={selected.tagName}
+               onChange={onChange}/>
       </InputWrapper>
       <MainLayout>
         {
@@ -80,13 +147,7 @@ const AddTag: React.FC = () => {
                 <ul>
                   {
                     categoryMap[category].map(tag => {
-                      return (
-                        <li key={tag.id}>
-                          <div>
-                            <Icon name={tag.chart}/>
-                          </div>
-                        </li>
-                      );
+                      return tagItem(tag);
                     })
                   }
                 </ul>
