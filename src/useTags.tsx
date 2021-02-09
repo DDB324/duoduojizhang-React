@@ -61,7 +61,13 @@ const useTags = () => {
     setTagsMap[category](tagsMap[category].filter(tag => tag.id !== removeTagId));
   };
 
+  //寻找标签
+  const findTag = (tagId: number) => {
+    const tags = incomeTags.concat(expenditureTags);
+    return tags.filter(tag => tag.id === tagId)[0];
+  };
+
   // return {incomeTags: incomeTags ...}
-  return {incomeTags, setIncomeTags, expenditureTags, setExpenditureTags, addTag, removeTag};
+  return {incomeTags, setIncomeTags, expenditureTags, setExpenditureTags, addTag, removeTag, findTag};
 };
 export {useTags};

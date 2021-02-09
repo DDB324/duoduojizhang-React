@@ -17,9 +17,8 @@ const NumberPadSection: React.FC<Props> = (props) => {
   const {note, selectedTagId} = props;
 
   //找到selectedTagId对应的图表
-  const {incomeTags, expenditureTags} = useTags();
-  const tags = incomeTags.concat(expenditureTags);
-  const selectedTag = tags.filter(tag => tag.id === selectedTagId[0])[0];
+  const {findTag} = useTags();
+  const selectedTag = findTag(selectedTagId[0]);
 
   //onChange函数
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
