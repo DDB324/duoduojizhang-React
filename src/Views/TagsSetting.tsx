@@ -79,54 +79,43 @@ type Tag = {
 }
 
 const TagsSetting: React.FC = () => {
-  //获取tag数据
-  const {expenditureTags, incomeTags, setExpenditureTags, setIncomeTags} = useTags();
+  //获取tags数据
+  const {expenditureTags, incomeTags, removeTag} = useTags();
 
   //声明category变量
   const [category, setCategory] = useState<'-' | '+'>('-');
 
   //删除tag
-  const removeTag = (tagId: number) => {
-    //声明'+''-'对应的操作
-    const categoryMap = {'-': expenditureTags, '+': incomeTags};
-    const setCategoryMap = {'-': setExpenditureTags, '+': setIncomeTags};
-
-    //深拷贝tags用来作为新的tags
-    const copyTags: Tag[] = JSON.parse(JSON.stringify(categoryMap[category]));
-
-    //找到要删除的tag的下标
-    const removedTag = copyTags.filter(item => item.id === tagId)[0];
-    const tagIndex = copyTags.indexOf(removedTag);
-
-    //增加确认删除
-    if (tagIndex >= 0 && window.confirm('确定要删除当前标签吗?')) {
-      copyTags.splice(tagIndex, 1);
-      setCategoryMap[category](copyTags);
+  const confirmRemoveTag = (removeTagId: number) => {
+    if (window.confirm('确定要删除当前标签吗?')) {
+      removeTag(category, removeTagId);
     }
   };
+
+  //tag的jsx
+  const tagItem = (tag: Tag) => {
+    return (
+      <li key={tag.chart}>
+        <div>
+          <Icon name={tag.chart}/>
+        </div>
+        <span>{tag.name}</span>
+        <button onClick={() => confirmRemoveTag(tag.id)}>删除</button>
+      </li>
+    );
+  };
+
   return (
     <Wrapper>
       <CategorySetting category={category}
                        onCategoryChange={(category) => {setCategory(category);}}/>
       <Main>
         <ul>
-          {
-            (category === '-' ? expenditureTags : incomeTags).map(tag => {
-              return (
-                <li key={tag.chart}>
-                  <div>
-                    <Icon name={tag.chart}/>
-                  </div>
-                  <span>{tag.name}</span>
-                  <button onClick={() => removeTag(tag.id)}>删除</button>
-                </li>
-              );
-            })
-          }
+          {(category === '-' ? expenditureTags : incomeTags).map(tag => tagItem(tag))}
         </ul>
       </Main>
       <footer>
-        <Link to={category==='-'?'/addExpenditureTag':'/addIncomeTag'}>
+        <Link to={category === '-' ? '/addExpenditureTag' : '/addIncomeTag'}>
           <Icon name='add'/>
           {category === '-' ? '添加支出标签' : '添加收入标签'}
         </Link>

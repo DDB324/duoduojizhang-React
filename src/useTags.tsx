@@ -29,6 +29,8 @@ const defaultExpenditureTags = [
 const useTags = () => {
   const [incomeTags, setIncomeTags] = useState<Tag[]>(defaultIncomeTags);
   const [expenditureTags, setExpenditureTags] = useState<Tag[]>(defaultExpenditureTags);
+
+  //增加标签
   const addTag = (category: '+' | '-', tag: Tag) => {
     const tags = incomeTags.concat(expenditureTags);
     if (tags.map(item => item.name).indexOf(tag.name) >= 0) {
@@ -51,7 +53,15 @@ const useTags = () => {
       }
     }
   };
+
+  //删除标签
+  const removeTag = (category: '+' | '-', removeTagId: number) => {
+    const tagsMap = {'+': incomeTags, '-': expenditureTags};
+    const setTagsMap = {'+': setIncomeTags, '-': setExpenditureTags};
+    setTagsMap[category](tagsMap[category].filter(tag => tag.id !== removeTagId));
+  };
+
   // return {incomeTags: incomeTags ...}
-  return {incomeTags, setIncomeTags, expenditureTags, setExpenditureTags, addTag};
+  return {incomeTags, setIncomeTags, expenditureTags, setExpenditureTags, addTag, removeTag};
 };
 export {useTags};
