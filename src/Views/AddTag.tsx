@@ -7,7 +7,6 @@ import {amusementTags, foodTags, shoppingTags, studyTags, trafficTags} from '../
 import styled from 'styled-components';
 import {Input} from '../components/Input';
 import {useTags} from '../useTags';
-import {createId} from '../lib/createId';
 
 //新增标签的页面
 const InputWrapper = styled.div`
@@ -94,23 +93,13 @@ const AddTag: React.FC = () => {
   //修改新增标签的图标
   const onToggleTag = (selectedTagChart: string) => setSelected({...selected, selectedTagChart});
 
-  //生成新标签的函数,数据类型:{id:number,chart:string,name:string}
-  const createNewTag = () => {
-    return {
-      id: createId(),
-      chart: selected.selectedTagChart,
-      name: selected.tagName
-    };
-  };
-
   //从useTags获取新增标签的函数
   const {addTag} = useTags();
 
   //点击完成执行的函数
   const onComplete = () => {
     if (selected.tagName.length <= 4) {
-      addTag(category, createNewTag());
-      console.log('成功');
+      addTag(category, selected.selectedTagChart,selected.tagName);
     } else {
       alert('标签名称不能超过4个字符,请重新输入');
     }

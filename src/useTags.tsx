@@ -31,13 +31,14 @@ const useTags = () => {
   const [expenditureTags, setExpenditureTags] = useState<Tag[]>(defaultExpenditureTags);
 
   //增加标签
-  const addTag = (category: '+' | '-', tag: Tag) => {
+  const addTag = (category: '+' | '-', chart: string, name: string) => {
     const tags = incomeTags.concat(expenditureTags);
-    if (tags.map(item => item.name).indexOf(tag.name) >= 0) {
+    if (tags.map(item => item.name).indexOf(name) >= 0) {
       window.alert('标签名已经存在,请重新输入!');
-    } else if (tag.name === '') {
+    } else if (name === '') {
       window.alert('标签名不能为空!');
     } else {
+      const tag: Tag = {id: createId(), chart, name};
       if (category === '-') {
         localStorage.setItem('-', JSON.stringify(tag));
         // setExpenditureTags([

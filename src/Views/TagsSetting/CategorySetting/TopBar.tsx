@@ -40,7 +40,8 @@ type Props = {
   centerName: string,
   rightChart: string,
   rightName: string,
-  onRight?: () => void
+  onRight?: () => void,
+  onLeft?:()=>void
 }
 
 //如果leftName和rightName要填写多个字,需要修改css中.right的width
