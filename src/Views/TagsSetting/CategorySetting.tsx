@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
 import {TopBar} from './CategorySetting/TopBar';
+import {useGoPage} from '../../lib/goPage';
 
-//在删除标签页面中切换收入和支出标签的页面
 const Wrapper = styled.section`
-
   > ul {
     display: flex;
     justify-content: center;
@@ -43,6 +42,7 @@ type Props = {
   onCategoryChange: (category: Category) => void
 }
 
+//在删除标签页面中切换收入和支出标签的页面
 const CategorySetting: React.FC<Props> = (props) => {
   //接受的外部数据
   const category = props.category;
@@ -62,11 +62,16 @@ const CategorySetting: React.FC<Props> = (props) => {
       return props.onCategoryChange(c);
     }
   };
+
+  //点击返回上一个页面
+  const {goBack} = useGoPage();
+
   return (
     <Wrapper>
       <TopBar leftChart='left' leftName='返回'
               centerName='标签设置'
-              rightChart='' rightName=''/>
+              rightChart='' rightName=''
+              onLeft={goBack}/>
       <ul>
         {
           categoryList.map(c => {

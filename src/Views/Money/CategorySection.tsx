@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
+import {useGoPage} from '../../lib/goPage';
 
-//记账页面上面的导航栏,切换收入支出
 const Wrapper = styled.section`
   background: #ffda43;
   position: relative;
@@ -44,6 +44,8 @@ type Props = {
   category: Category
   onCategoryChange: (category: Category, selectedTagId: number[]) => void
 }
+
+//记账页面上面的导航栏,切换收入支出
 const CategorySection: React.FC<Props> = (props) => {
   //category内容的哈希表
   const categoryMap = {'-': '支出', '+': '收入'};
@@ -64,6 +66,9 @@ const CategorySection: React.FC<Props> = (props) => {
     }
   };
 
+  //点击取消触发页面的跳转
+  const {goTo} = useGoPage();
+
   return (
     <Wrapper>
       <ul>
@@ -81,7 +86,7 @@ const CategorySection: React.FC<Props> = (props) => {
           )
         }
       </ul>
-      <span>取消</span>
+      <span onClick={() => goTo('/')}>取消</span>
     </Wrapper>
   );
 };

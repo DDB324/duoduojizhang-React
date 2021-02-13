@@ -7,6 +7,7 @@ import {amusementTags, foodTags, shoppingTags, studyTags, trafficTags} from '../
 import styled from 'styled-components';
 import {Input} from '../components/Input';
 import {useTags} from '../useTags';
+import {useGoPage} from '../lib/goPage';
 
 //新增标签的页面
 const InputWrapper = styled.div`
@@ -93,15 +94,19 @@ const AddTag: React.FC = () => {
   //修改新增标签的图标
   const onToggleTag = (selectedTagChart: string) => setSelected({...selected, selectedTagChart});
 
-  //从useTags获取新增标签的函数
-  const {addTag} = useTags();
+  //获取封装的ReactHistory
+  const {goBack, goTo} = useGoPage();
 
   //点击完成执行的函数
+  const {addTag} = useTags();
   const onComplete = () => {
-    if (selected.tagName.length <= 4) {
-      addTag(category, selected.selectedTagChart,selected.tagName);
-    } else {
+    if (selected.tagName.length === 0) {
+      alert('标签名称不能为空,请重新输入');
+    } else if (selected.tagName.length > 4) {
       alert('标签名称不能超过4个字符,请重新输入');
+    } else {
+      addTag(category, selected.selectedTagChart, selected.tagName);
+      goTo('/money');
     }
   };
 
@@ -121,7 +126,8 @@ const AddTag: React.FC = () => {
       <TopBar leftChart='left' leftName='返回'
               centerName={category === '-' ? '添加支出标签' : '添加收入标签'}
               rightChart='' rightName='完成'
-              onRight={onComplete}/>
+              onRight={onComplete}
+              onLeft={goBack}/>
       <InputWrapper>
         <Input iconName={selected.selectedTagChart} type='text'
                placeholder='输入标签名称(不超过4个汉字)' value={selected.tagName}
