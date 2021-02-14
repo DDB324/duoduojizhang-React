@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useTags} from 'useTags';
+import {useTags} from 'hooks/useTags';
 import Icon from 'components/Icon';
 import styled from 'styled-components';
 import {CategorySetting} from './TagsSetting/CategorySetting';
@@ -95,7 +95,7 @@ const TagsSetting: React.FC = () => {
   //tag的jsx
   const tagItem = (tag: Tag) => {
     return (
-      <li key={tag.chart}>
+      <li key={tag.id}>
         <div>
           <Icon name={tag.chart}/>
         </div>

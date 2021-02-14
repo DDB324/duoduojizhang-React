@@ -2,7 +2,7 @@ import React, {ChangeEventHandler, useState} from 'react';
 import {WrapperNumberPad} from './NumberPadSection/WrapperNumberPad';
 import NP from 'number-precision';
 import {Input} from '../../components/Input';
-import {useTags} from '../../useTags';
+import {useTags} from '../../hooks/useTags';
 
 //显示记账页面的数字面板的内容
 type Props = {
@@ -18,7 +18,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
 
   //找到selectedTagId对应的图表
   const {findTag} = useTags();
-  const selectedTag = findTag(selectedTagId[0]);
+  const selectedTagChart = findTag(selectedTagId[0])?.chart || 'repase';
 
   //onChange函数
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -130,7 +130,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
   return (
     <WrapperNumberPad>
       <div className='NoteAndOutput'>
-        <Input iconName={selectedTag.chart} spanContent='备注:' type='text'
+        <Input iconName={selectedTagChart} spanContent='备注:' type='text'
                placeholder='点击写备注...' value={note}
                onChange={onChange}/>
         <div className='output'>

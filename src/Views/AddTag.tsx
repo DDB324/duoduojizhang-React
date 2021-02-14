@@ -3,10 +3,10 @@ import {TopBar} from './TagsSetting/CategorySetting/TopBar';
 import {WrapperLayout} from '../components/Layout/WrapperLayout';
 import {MainLayout} from '../components/Layout/MainLayout';
 import Icon from '../components/Icon';
-import {amusementTags, foodTags, shoppingTags, studyTags, trafficTags} from '../allTags';
+import {amusementTags, foodTags, shoppingTags, studyTags, trafficTags} from '../lib/allTags';
 import styled from 'styled-components';
 import {Input} from '../components/Input';
-import {useTags} from '../useTags';
+import {useTags} from '../hooks/useTags';
 import {useGoPage} from '../lib/goPage';
 
 //新增标签的页面
@@ -100,14 +100,8 @@ const AddTag: React.FC = () => {
   //点击完成执行的函数
   const {addTag} = useTags();
   const onComplete = () => {
-    if (selected.tagName.length === 0) {
-      alert('标签名称不能为空,请重新输入');
-    } else if (selected.tagName.length > 4) {
-      alert('标签名称不能超过4个字符,请重新输入');
-    } else {
-      addTag(category, selected.selectedTagChart, selected.tagName);
-      goTo('/money');
-    }
+    const result = addTag(category, selected.selectedTagChart, selected.tagName);
+    result && setTimeout(() => goTo('/money'));
   };
 
   //封装的遍历标签的jsx

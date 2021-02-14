@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {CategorySection} from './Money/CategorySection';
 import {TagsSection} from './Money/TagsSection';
 import {NumberPadSection} from './Money/NumberPadSection';
-import {useTags} from '../useTags';
+import {useTags} from '../hooks/useTags';
 import {WrapperLayout} from 'components/Layout/WrapperLayout';
 import {MainLayout} from 'components/Layout/MainLayout';
 
