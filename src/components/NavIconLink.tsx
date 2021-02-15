@@ -6,17 +6,31 @@ import styled from 'styled-components';
 const LinkWrapper = styled.div`
   > a {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     &.selected {
-      color: red;
+      > div {
+        background: #ffda43;
+
+        > .icon {
+          color: #000;
+        }
+      }
     }
 
-    > .icon {
-      height: 24px;
-      width: 24px;
+    > .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10%;
+
+      > .icon {
+        color: #7e7e7e;
+        height: 24px;
+        width: 24px;
+      }
     }
   }
 `;
@@ -29,7 +43,9 @@ const NavIconLink = (props: Props) => {
   return (
     <LinkWrapper>
       <NavLink to={'/' + props.name} activeClassName='selected'>
-        <Icon name={props.name}/>
+        <div className='wrapper'>
+          <Icon name={props.name}/>
+        </div>
         {props.text}
       </NavLink>
     </LinkWrapper>
