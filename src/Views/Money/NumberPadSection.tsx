@@ -11,10 +11,11 @@ type Props = {
   onNoteChange: (note: string) => void
   onAmountChange: (amount: number) => void
   selectedTagId: number[]
+  onOk: () => void
 }
 const NumberPadSection: React.FC<Props> = (props) => {
   //声明外部数据
-  const {note, selectedTagId} = props;
+  const {note, selectedTagId, onOk} = props;
 
   //找到selectedTagId对应的图表
   const {findTag} = useTags();
@@ -49,12 +50,10 @@ const NumberPadSection: React.FC<Props> = (props) => {
     const arrayMinus = output.split('-');
     const removeLastCharacter = output.slice(0, -1);
     const plus = (numbers: string[]) => {
-      // return (parseFloat(numbers[0]) + parseFloat(numbers[1])).toString();
       const result = NP.plus(parseFloat(numbers[0]), parseFloat(numbers[1]));
       return result.toString();
     };
     const minus = (numbers: string[]) => {
-      // return (parseFloat(numbers[0]) - parseFloat(numbers[1])).toString();
       const result = NP.minus(parseFloat(numbers[0]), parseFloat(numbers[1]));
       return result.toString();
     };
@@ -101,7 +100,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
         break;
       case '完成':
         props.onAmountChange(parseFloat(output));
-        setOutput('0');
+        onOk()
         break;
       case '=':
         if (computeResult().indexOf('-') >= 0) {
@@ -153,7 +152,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
         <button>.</button>
         <button>0</button>
         <button>删除</button>
-        <button className='ok'>{complete}</button>
+        <button className='ok' onClick={()=>props.onAmountChange(parseFloat(output))}>{complete}</button>
       </div>
     </WrapperNumberPad>
   );
