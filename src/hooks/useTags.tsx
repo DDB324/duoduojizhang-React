@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {createId} from '../lib/createId';
+import {createTagId} from '../lib/createId';
 import {useUpdate} from './useUpdate';
 
 type Tag = {
@@ -9,22 +9,22 @@ type Tag = {
 }
 
 const defaultIncomeTags = () => [
-  {id: createId(), chart: 'draw-money', name: '取钱'},
-  {id: createId(), chart: 'save-money', name: '存钱'},
-  {id: createId(), chart: 'wage', name: '工资'},
+  {id: createTagId(), chart: 'draw-money', name: '取钱'},
+  {id: createTagId(), chart: 'save-money', name: '存钱'},
+  {id: createTagId(), chart: 'wage', name: '工资'},
 ];
 const defaultExpenditureTags = () => [
-  {id: createId(), chart: 'repast', name: '餐饮'},
-  {id: createId(), chart: 'shopping2', name: '购物'},
-  {id: createId(), chart: 'airplane', name: '旅行'},
-  {id: createId(), chart: 'amusement', name: '娱乐'},
-  {id: createId(), chart: 'cinema', name: '电影'},
-  {id: createId(), chart: 'game', name: '游戏'},
-  {id: createId(), chart: 'gift', name: '礼物'},
-  {id: createId(), chart: 'journey', name: '行李'},
-  {id: createId(), chart: 'maintain', name: '修理'},
-  {id: createId(), chart: 'music', name: '音乐'},
-  {id: createId(), chart: 'sing', name: '唱歌'},
+  {id: createTagId(), chart: 'repast', name: '餐饮'},
+  {id: createTagId(), chart: 'shopping2', name: '购物'},
+  {id: createTagId(), chart: 'airplane', name: '旅行'},
+  {id: createTagId(), chart: 'amusement', name: '娱乐'},
+  {id: createTagId(), chart: 'cinema', name: '电影'},
+  {id: createTagId(), chart: 'game', name: '游戏'},
+  {id: createTagId(), chart: 'gift', name: '礼物'},
+  {id: createTagId(), chart: 'journey', name: '行李'},
+  {id: createTagId(), chart: 'maintain', name: '修理'},
+  {id: createTagId(), chart: 'music', name: '音乐'},
+  {id: createTagId(), chart: 'sing', name: '唱歌'},
 ];
 
 const useTags = () => {
@@ -63,7 +63,7 @@ const useTags = () => {
       window.alert('标签名称不能超过4个字符,请重新输入');
       return false;
     } else {
-      const tag: Tag = {id: createId(), chart, name};
+      const tag: Tag = {id: createTagId(), chart, name};
       if (category === '-') {
         setExpenditureTags([
           ...expenditureTags,

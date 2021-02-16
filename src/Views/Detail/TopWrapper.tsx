@@ -20,6 +20,7 @@ const TopWrapper = styled.div`
     > .date {
       display: flex;
       flex-direction: column;
+      width: 30%;
 
       > .month {
         display: flex;
@@ -77,4 +78,4 @@ const TopWrapper = styled.div`
   }
 `;
 
-export {TopWrapper}
+export {TopWrapper};

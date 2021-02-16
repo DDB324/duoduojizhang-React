@@ -1,76 +1,46 @@
 import React from 'react';
 import {Layout} from 'components/Layout';
-import Icon from '../components/Icon';
-import title from '../pictures/title.png';
-import {TopWrapper} from './Detail/TopWrapper';
-import {MainWrapper} from './Detail/MainWrapper';
-import {useRecords} from '../hooks/useRecords';
-import {useTags} from '../hooks/useTags';
+import {RecordItem, useRecords} from '../hooks/useRecords';
 import day from 'dayjs';
+import {Top} from 'Views/Detail/Top';
+import {Main} from './Detail/Main';
 
 //显示记账明细的页面
 const Detail = () => {
+  //获取records
   const {records} = useRecords();
-  const {findTag} = useTags();
-  const currentTime = new Date().toISOString();
-  const top = () => {
-    return <TopWrapper>
-      <main><img src={title} alt=""/></main>
-      <div>
-        <div className='date'>
-          <div className='year'>{day(currentTime).format('YYYY年')}</div>
-          <div className='month'>
-            <div className='month-content'>{day(currentTime).format('MM')}</div>
-            <span>月</span>
-            <span className='triangle'/>
-            <span className='vertical-line'/>
-          </div>
-        </div>
-        <div className='income'>
-          <div>收入</div>
-          <div className='income-content'>10</div>
-        </div>
-        <div className='expenditure'>
-          <div>支出</div>
-          <div className='expenditure-content'>5</div>
-        </div>
-      </div>
-    </TopWrapper>;
-  };
-  const main = () => {
-      return <MainWrapper>
-        <div className='top'>
-          <div className='date'>02月15日 星期一</div>
-          <div className='income'>收入:&nbsp;&nbsp;10</div>
-          <div className='expenditure'>支出:&nbsp;&nbsp;5</div>
-        </div>
-        <ul>
-          {records.map(record => (
-            <li>
-              <div className='icon-wrapper'>
-                <Icon name={findTag(record.selectedTagId[0]).chart}/>
-              </div>
-              <div className='record-name'>
-                {record.note ? record.note : findTag(record.selectedTagId[0]).name}
-              </div>
-              <div className='record-amount'>{(record.category === '-' ? '-' : '+') + record.amount}</div>
-              <span className='vertical-line'/>
-            </li>
-          ))}
-        </ul>
-      </MainWrapper>;
+
+  //申明按照日期储存数据的hash表
+  const hash: { [K: string]: RecordItem[] } = {}; //{02月16日:[record,record]}
+
+  //对记账数据尽心处理,按照日期分类
+  records.forEach(record => {
+    const key = day(record.createAt).format('YYYY-MM-DD');
+    if (!(key in hash)) {
+      hash[key] = [];
     }
-  ;
+    hash[key].push(record);
+  });
+
+  //将hash表中的数据转换为数组并按照日期的近远排列
+  const hashArr = Object.entries(hash).sort((a, b) => {
+    if (a[0] === b[0]) return 0;
+    if (a[0] > b[0]) return -1;
+    return 1;
+  });
+
+  //计算总收入总支出的函数
+  const value = (records: RecordItem[], category: '+' | '-') => {
+    const expenditureArr = records.filter(record => record.category === category).map(x => x.amount);
+    return expenditureArr.reduce((sum, n) => sum + n, 0);
+  };
+
   return (
     <Layout
-      top={top()}
-      main={main()}
+      top={Top(records, value)}
+      main={Main(hashArr, value)}
     />
   );
 };
 
-export
-{
-  Detail
-}
-  ;
+export {Detail};

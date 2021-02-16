@@ -1,7 +1,9 @@
 import {useEffect, useState} from 'react';
 import {useUpdate} from './useUpdate';
+import {createRecordId} from '../lib/createId';
 
-type RecordItem = {
+export type RecordItem = {
+  id: number
   category: '+' | '-'
   selectedTagId: number[]
   note: string
@@ -10,7 +12,7 @@ type RecordItem = {
 }
 
 //继承某个类型并删除其中的某个属性
-type newRecordItem = Omit<RecordItem, 'createAt'>
+type newRecordItem = Omit<RecordItem, 'createAt' | 'id'>
 
 const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([]);
@@ -27,7 +29,11 @@ const useRecords = () => {
 
   //增加记账内容
   const addRecord = (newRecord: newRecordItem) => {
-    const record = {...newRecord, createAt: (new Date()).toISOString()};
+    const record = {
+      ...newRecord,
+      createAt: (new Date()).toISOString(),
+      id: createRecordId()
+    };
     setRecords([...records, record]);
   };
 

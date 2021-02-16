@@ -57,13 +57,6 @@ const Money = () => {
 
   return (
     <WrapperLayout>
-      {'category: ' + selected.category}
-      <hr/>
-      {'selectedTagId: ' + selected.selectedTagId}
-      <hr/>
-      {'note: ' + selected.note}
-      <hr/>
-      {'amount: ' + selected.amount}
       <CategorySection category={selected.category}
                        onCategoryChange={(category, selectedTagId) =>
                          onChange({category: category, selectedTagId: selectedTagId})}/>
