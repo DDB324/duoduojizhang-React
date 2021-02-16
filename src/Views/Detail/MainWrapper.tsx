@@ -26,6 +26,7 @@ const MainWrapper = styled.div`
       padding: 12px 12px;
       justify-content: center;
       align-items: center;
+      position: relative;
 
       > .icon-wrapper {
         display: flex;
@@ -45,24 +46,23 @@ const MainWrapper = styled.div`
 
       > .record-name {
         margin-right: auto;
-        position: relative;
-
-        > .vertical-line {
-          position: absolute;
-          bottom: -16px;
-          left: 0;
-          height: 1px;
-          background: rgba(0, 0, 0, .2);
-          width: 1000px;
-        }
       }
 
       > .record-amount {
 
+      }
+
+      > .vertical-line {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 1px;
+        background: rgba(0, 0, 0, .2);
+        width: 85%;
       }
     }
 
   }
 `;
 
-export {MainWrapper}
+export {MainWrapper};

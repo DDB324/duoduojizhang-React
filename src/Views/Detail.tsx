@@ -51,10 +51,10 @@ const Detail = () => {
                 <Icon name={findTag(record.selectedTagId[0]).chart}/>
               </div>
               <div className='record-name'>
-                {findTag(record.selectedTagId[0]).name + day(record.createAt).format('MM月DD日 dddd')}
-                <span className='vertical-line'/>
+                {record.note ? record.note : findTag(record.selectedTagId[0]).name}
               </div>
               <div className='record-amount'>{(record.category === '-' ? '-' : '+') + record.amount}</div>
+              <span className='vertical-line'/>
             </li>
           ))}
         </ul>
