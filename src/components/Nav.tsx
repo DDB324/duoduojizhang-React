@@ -12,6 +12,7 @@ const NavUl = styled.ul`
   > li {
     width: 33.3%;
     padding: 8px 0 4px;
+    -webkit-tap-highlight-color: transparent;
   }
 `;
 

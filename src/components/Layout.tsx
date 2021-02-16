@@ -4,14 +4,16 @@ import {WrapperLayout} from './Layout/WrapperLayout';
 import {MainLayout} from './Layout/MainLayout';
 
 type Props = {
-  children: any
+  top: any
+  main: any
 }
 
 const Layout = (props: Props) => {
   return (
     <WrapperLayout>
+      {props.top}
       <MainLayout>
-        {props.children}
+        {props.main}
       </MainLayout>
       <Nav/>
     </WrapperLayout>
