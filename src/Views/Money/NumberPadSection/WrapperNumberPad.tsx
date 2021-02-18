@@ -48,6 +48,7 @@ const WrapperNumberPad = styled.section`
         overflow: hidden;
 
         > input {
+          background: #ffda43;
           position: absolute;
           left: 0;
           top: 0;
@@ -57,12 +58,6 @@ const WrapperNumberPad = styled.section`
           ::-webkit-calendar-picker-indicator {
             height: 100%;
             width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 2px;
-            box-shadow: inset 0 1px #fff, 0 1px #eee;
-            background-color: #eee;
-            background-image: -webkit-linear-gradient(top, #f0f0f0, #e6e6e6);
-            color: #666;
           }
         }
 

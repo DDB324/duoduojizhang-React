@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const TopWrapper = styled.div`
   background: #ffda43;
-  background: linear-gradient(180deg, rgba(255, 218, 67, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  background: linear-gradient(180deg, rgba(255, 218, 67, 1) 80%, rgba(255, 255, 255, 1) 100%);
 
   > main {
     padding: 16px 0;
@@ -20,36 +20,60 @@ const TopWrapper = styled.div`
     > .date {
       display: flex;
       flex-direction: column;
-      width: 30%;
+      width: 25%;
 
       > .month {
-        display: flex;
-        align-items: flex-end;
         height: 40px;
+        position: relative;
+        overflow: hidden;
 
-        > .month-content {
-          font-size: 2em;
+        > input {
+          background: #ffda43;
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 90%;
+          width: 90%;
+
+          ::-webkit-calendar-picker-indicator {
+            height: 100%;
+            width: 100%;
+          }
         }
 
-        > .triangle {
-          margin-left: 4px;
-          width: 0;
-          height: 0;
-          border: 7px solid transparent;
-          border-top: 10px solid #333;
-        }
+        > .month-content-wrapper {
+          top: 0;
+          left: 0;
+          background: #ffda43;
+          position: absolute;
+          pointer-events: none;
+          display: flex;
+          align-items: flex-end;
 
-        > .vertical-line {
-          width: 1px;
-          height: 35px;
-          background: #333;
-          margin-left: 12px;
+          > .month-content {
+            font-size: 2em;
+          }
+
+          > .triangle {
+            margin-left: 4px;
+            width: 0;
+            height: 0;
+            border: 7px solid transparent;
+            border-top: 10px solid #333;
+          }
+
+          > .vertical-line {
+            width: 1px;
+            height: 35px;
+            background: #333;
+            margin-left: 12px;
+          }
         }
       }
     }
 
     > .income {
-      width: 35%;
+      width: 40%;
       display: flex;
       flex-direction: column;
       align-items: center;
