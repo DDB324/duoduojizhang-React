@@ -2,6 +2,7 @@ import Icon from './Icon';
 import {NavLink} from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
+import {gCss} from 'gCss';
 
 const LinkWrapper = styled.div`
   > a {
@@ -12,10 +13,10 @@ const LinkWrapper = styled.div`
 
     &.selected {
       > div {
-        background: #ffda43;
+        background: ${gCss.BG};
 
         > .icon {
-          color: #000;
+          color: ${gCss.iconSColor};
         }
       }
     }
@@ -27,9 +28,9 @@ const LinkWrapper = styled.div`
       border-radius: 10%;
 
       > .icon {
-        color: #7e7e7e;
-        height: 24px;
-        width: 24px;
+        color: ${gCss.iconNColor};
+        height: ${gCss.iconNWH};
+        width: ${gCss.iconNWH};
       }
     }
   }

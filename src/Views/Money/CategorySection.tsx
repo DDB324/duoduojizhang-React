@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
 import {useGoPage} from '../../lib/goPage';
+import {gCss} from 'gCss';
 
 const Wrapper = styled.section`
-  background: #ffda43;
+  background: ${gCss.BG};
   position: relative;
 
   > ul {
@@ -24,7 +25,7 @@ const Wrapper = styled.section`
           bottom: -11px;
           left: 0;
           height: 2.5px;
-          background: black;
+          background: ${gCss.iconSColor};
           width: 100%;
         }
       }

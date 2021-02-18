@@ -1,10 +1,10 @@
 import {MainWrapper} from './MainWrapper';
-import {useTags} from '../../hooks/useTags';
+import {useTags} from 'hooks/useTags';
 import day from 'dayjs';
-import Icon from '../../components/Icon';
-import {RecordItem} from '../../hooks/useRecords';
+import Icon from 'components/Icon';
+import {RecordItem} from 'hooks/useRecords';
 import React from 'react';
-import {NoContent} from '../../components/NoContent';
+import {NoContent} from 'components/NoContent';
 
 
 type Props = {

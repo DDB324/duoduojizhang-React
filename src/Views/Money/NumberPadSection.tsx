@@ -1,7 +1,7 @@
 import React, {ChangeEventHandler, useRef, useState} from 'react';
 import {WrapperNumberPad} from './NumberPadSection/WrapperNumberPad';
-import {Input} from '../../components/Input';
-import {useTags} from '../../hooks/useTags';
+import {Input} from 'components/Input';
+import {useTags} from 'hooks/useTags';
 import {generateOutput} from './NumberPadSection/generateOutput';
 import {today} from 'lib/date';
 

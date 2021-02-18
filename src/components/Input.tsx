@@ -1,6 +1,7 @@
 import Icon from './Icon';
 import React from 'react';
 import styled from 'styled-components';
+import {gCss} from 'gCss';
 
 const Label = styled.label`
   display: flex;
@@ -12,15 +13,15 @@ const Label = styled.label`
     margin: 0 8px;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: ${gCss.BR};
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ffda43;
+    background: ${gCss.BG};
 
     > .icon {
-      width: 30px;
-      height: 30px;
+      width: ${gCss.iconNWH};
+      height: ${gCss.iconNWH};
     }
   }
 

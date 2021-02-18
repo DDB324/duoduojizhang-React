@@ -1,6 +1,7 @@
 import Icon from 'components/Icon';
 import React from 'react';
 import styled from 'styled-components';
+import {gCss} from '../../../gCss';
 
 //顶部导航栏,左中右布局,点击左右内容可以实现页面的跳转
 const Wrapper = styled.header`
@@ -8,7 +9,7 @@ const Wrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffda43;
+  background: ${gCss.BG};
 
   > .left {
     display: flex;

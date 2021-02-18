@@ -1,8 +1,9 @@
 import Icon from './Icon';
 import styled from 'styled-components';
+import {gCss} from '../gCss';
 
 const NoContentWrapper = styled.div`
-  color: #cacaca;
+  color: ${gCss.iconTColor};
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -17,7 +18,7 @@ const NoContentWrapper = styled.div`
 
   > div {
     > strong {
-      color: #ffda43;
+      color: ${gCss.BG};
     }
   }
 `;

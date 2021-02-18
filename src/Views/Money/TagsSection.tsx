@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Icon from 'components/Icon';
 import React, {useRef} from 'react';
 import {Link} from 'react-router-dom';
+import {gCss} from '../../gCss';
 
 //记账页面显示所有标签和新增标签按钮的内容
 const Wrapper = styled.section`
@@ -11,7 +12,6 @@ const Wrapper = styled.section`
   > ul {
     display: flex;
     flex-wrap: wrap;
-    font-size: 14px;
 
     > li {
       display: flex;
@@ -22,22 +22,22 @@ const Wrapper = styled.section`
       padding: 12px 0;
 
       > div {
-        width: 60px;
-        height: 60px;
-        background: #f6f5f5;
-        border-radius: 50%;
+        width: ${gCss.iconBigBGWH};
+        height: ${gCss.iconBigBGWH};
+        background: ${gCss.iconBG};
+        border-radius: ${gCss.BR};
         margin-bottom: 4px;
         display: flex;
         justify-content: center;
         align-items: center;
 
         &.selected {
-          background: #ffda43;
+          background: ${gCss.BG};
         }
 
         > .icon {
-          width: 36px;
-          height: 36px;
+          width: ${gCss.iconBigWH};
+          height: ${gCss.iconBigWH};
         }
       }
     }
@@ -79,6 +79,13 @@ const TagsSection: React.FC<Props> = (props) => {
     return (
       <Wrapper>
         <ul>
+          <li onClick={handleClick}>
+            <div>
+              <Icon name='setting'/>
+            </div>
+            <span><strong>新增标签</strong></span>
+            <Link ref={textLink} to={'/tags'}/>
+          </li>
           {tags.map(tag => {
             return (
               <li key={tag.id} onClick={() => onToggleTag(tag.id)}>
@@ -89,13 +96,7 @@ const TagsSection: React.FC<Props> = (props) => {
               </li>
             );
           })}
-          <li onClick={handleClick}>
-            <div>
-              <Icon name='money'/>
-            </div>
-            <span>新增标签</span>
-            <Link ref={textLink} to={'/tags'}/>
-          </li>
+
         </ul>
       </Wrapper>
     );

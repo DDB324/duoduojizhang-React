@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React, {useState} from 'react';
 import {TopBar} from './CategorySetting/TopBar';
 import {useGoPage} from '../../lib/goPage';
+import {gCss} from '../../gCss';
 
 const Wrapper = styled.section`
   > ul {
@@ -9,7 +10,7 @@ const Wrapper = styled.section`
     justify-content: center;
     align-items: center;
     padding-bottom: 8px;
-    background: #ffda43;
+    background: ${gCss.BG};
 
     > li {
       text-align: center;
@@ -28,8 +29,8 @@ const Wrapper = styled.section`
       }
 
       &.selected {
-        background: #333132;
-        color: #ffda43;
+        background: ${gCss.SBG};
+        color: ${gCss.BG};
       }
     }
   }

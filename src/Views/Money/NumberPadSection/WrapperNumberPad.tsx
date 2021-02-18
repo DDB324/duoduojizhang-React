@@ -1,18 +1,19 @@
 import styled from 'styled-components';
+import {gCss} from 'gCss';
 
 //抽离的数字面板的样式
 const WrapperNumberPad = styled.section`
-  background: #f3f3f3;
+  background: ${gCss.numberPadBG};
 
   > .NoteAndOutput {
     display: flex;
     line-height: 50px;
-    border-top: 1px solid #cccccc;
+    border-top: 1px solid ${gCss.borderColor};
     justify-content: space-between;
 
     > .output {
       padding-right: 12px;
-      font-size: 30px;
+      font-size: 2em;
       flex-shrink: 0;
     }
   }
@@ -20,14 +21,14 @@ const WrapperNumberPad = styled.section`
   > .pad {
     display: flex;
     flex-wrap: wrap;
-    border-top: 1px solid #cccccc;
+    border-top: 1px solid ${gCss.borderColor};
 
     > button {
       width: 25%;
       height: 64px;
-      border-right: 1px solid #cacaca;
-      border-bottom: 1px solid #cacaca;
-      font-size: 18px;
+      border-right: 1px solid ${gCss.borderColor};
+      border-bottom: 1px solid ${gCss.borderColor};
+      font-size: 1.2em;
 
       &:nth-child(13), &:nth-child(14),
       &:nth-child(15), &:nth-child(16) {
@@ -40,7 +41,7 @@ const WrapperNumberPad = styled.section`
       }
 
       &.ok {
-        background: #ffda43;
+        background: ${gCss.BG};
       }
 
       &.date {
@@ -48,7 +49,7 @@ const WrapperNumberPad = styled.section`
         overflow: hidden;
 
         > input {
-          background: #ffda43;
+          background: ${gCss.BG};
           position: absolute;
           left: 0;
           top: 0;
@@ -67,7 +68,7 @@ const WrapperNumberPad = styled.section`
           top: 0;
           height: 100%;
           width: 100%;
-          background: #ffda43;
+          background: ${gCss.BG};
           pointer-events: none;
           line-height: 64px;
           font-size: .8em;

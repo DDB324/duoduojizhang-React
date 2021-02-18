@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {gCss} from '../../gCss';
 
 const MainWrapper = styled.div`
   overflow-x: hidden;
@@ -7,8 +8,8 @@ const MainWrapper = styled.div`
 
     > .top {
       padding: 8px;
-      color: rgba(0, 0, 0, .2);
-      border-bottom: 1px solid rgb(0, 0, 0, .2);
+      color: ${gCss.BNC};
+      border-bottom: 1px solid ${gCss.BTC};
       display: flex;
       font-size: 0.8em;
 
@@ -34,8 +35,8 @@ const MainWrapper = styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 30px;
-          width: 30px;
+          height: ${gCss.iconNWH};
+          width: ${gCss.iconNWH};
           border-radius: 50%;
           background: #ffda43;
           margin-right: 12px;

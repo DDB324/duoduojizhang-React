@@ -8,11 +8,12 @@ import {useTags} from '../hooks/useTags';
 import {useGoPage} from '../lib/goPage';
 import {Layout} from '../components/Layout';
 import {AddTagSection} from './AddTag/AddTagSection';
+import {gCss} from '../gCss';
 
 //新增标签的页面
 const InputWrapper = styled.div`
   padding: 4px 12px;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid ${gCss.tagBC};
 `;
 
 

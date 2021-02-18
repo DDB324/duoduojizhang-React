@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {gCss} from '../../gCss';
 
 const TagsSettingMain = styled.div`
   flex-grow: 1;
@@ -7,10 +8,9 @@ const TagsSettingMain = styled.div`
 
   > ul {
     padding-left: 12px;
-    box-shadow: 0 -1px 5px #efefef;
+    box-shadow: ${gCss.thinBS};
     display: flex;
     flex-wrap: wrap;
-    font-size: 14px;
     flex-direction: column;
 
     > li {
@@ -18,21 +18,21 @@ const TagsSettingMain = styled.div`
       justify-content: flex-start;
       align-items: center;
       padding: 8px 12px 8px 0;
-      border-bottom: 1px solid #efefef;
+      border-bottom: 1px solid ${gCss.tagBC};
 
       > div {
         margin: 0 20px 0 12px;
-        width: 30px;
-        height: 30px;
-        background: #f6f5f5;
-        border-radius: 50%;
+        width: ${gCss.iconSmallBGWH};
+        height: ${gCss.iconSmallBGWH};
+        background: ${gCss.iconBG};
+        border-radius: ${gCss.BR};
         display: flex;
         justify-content: center;
         align-items: center;
 
         > .icon {
-          width: 24px;
-          height: 24px;
+          width: ${gCss.iconSWH};
+          height: ${gCss.iconSWH};
         }
       }
 
@@ -48,4 +48,4 @@ const TagsSettingMain = styled.div`
     }
   }
 `;
-export {TagsSettingMain}
+export {TagsSettingMain};
