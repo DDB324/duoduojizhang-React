@@ -3,11 +3,10 @@ import {CategorySection} from './Money/CategorySection';
 import {TagsSection} from './Money/TagsSection';
 import {NumberPadSection} from './Money/NumberPadSection';
 import {useTags} from '../hooks/useTags';
-import {WrapperLayout} from 'components/Layout/WrapperLayout';
-import {MainLayout} from 'components/Layout/MainLayout';
 import {useRecords} from '../hooks/useRecords';
 import {useGoPage} from '../lib/goPage';
 import {today} from 'lib/date';
+import {Layout} from '../components/Layout';
 
 type Category = '-' | '+';
 const defaultFormData = () => ({
@@ -57,27 +56,26 @@ const Money = () => {
   };
 
   return (
-    <WrapperLayout className={window.localStorage.getItem('isSafari') === '1' ? 'isSafari' : ''}>
-      <CategorySection category={selected.category}
-                       onCategoryChange={(category, selectedTagId) =>
-                         onChange({category: category, selectedTagId: selectedTagId})}/>
-      <MainLayout>
-        <TagsSection selectedTagId={selected.selectedTagId}
-                     onTagChange={(selectedTagId: number[]) => onChange({selectedTagId})}
-                     tags={selected.category === '-' ? expenditureTags : incomeTags}/>
-      </MainLayout>
-      {
-        selected.selectedTagId.length > 0 &&
-        <NumberPadSection note={selected.note}
-                          onNoteChange={(note: string) => onChange({note})}
-                          amount={selected.amount}
-                          onAmountChange={(amount) => onChange({amount})}
-                          selectedTagId={selected.selectedTagId}
-                          onOk={onOk}
-                          onDateChange={(createAt: string) => onChange({createAt})}
-                          date={selected.createAt}/>
+    <Layout
+      header={<CategorySection category={selected.category}
+                               onCategoryChange={(category, selectedTagId) =>
+                                 onChange({category: category, selectedTagId: selectedTagId})}/>
       }
-    </WrapperLayout>
+      main={<TagsSection selectedTagId={selected.selectedTagId}
+                         onTagChange={(selectedTagId: number[]) => onChange({selectedTagId})}
+                         tags={selected.category === '-' ? expenditureTags : incomeTags}/>
+      }
+      footer={selected.selectedTagId.length > 0 &&
+      <NumberPadSection note={selected.note}
+                        onNoteChange={(note: string) => onChange({note})}
+                        amount={selected.amount}
+                        onAmountChange={(amount) => onChange({amount})}
+                        selectedTagId={selected.selectedTagId}
+                        onOk={onOk}
+                        onDateChange={(createAt: string) => onChange({createAt})}
+                        date={selected.createAt}/>
+      }
+    />
   );
 };
 

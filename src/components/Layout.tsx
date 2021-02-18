@@ -1,11 +1,11 @@
 import React from 'react';
-import Nav from './Nav';
 import {WrapperLayout} from './Layout/WrapperLayout';
 import {MainLayout} from './Layout/MainLayout';
 
 type Props = {
-  top: any
+  header: any
   main: any
+  footer?: any
 }
 
 const Layout = (props: Props) => {
@@ -13,11 +13,11 @@ const Layout = (props: Props) => {
     <WrapperLayout className={window.localStorage.getItem('isSafari') === '1' ?
       'isSafari' :
       ''}>
-      {props.top}
+      {props.header}
       <MainLayout>
         {props.main}
       </MainLayout>
-      <Nav/>
+      {props.footer}
     </WrapperLayout>
   );
 };

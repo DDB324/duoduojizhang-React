@@ -4,6 +4,7 @@ import {RecordItem, useRecords} from '../hooks/useRecords';
 import {Top} from 'Views/Detail/Top';
 import {Main} from './Detail/Main';
 import {month, year} from 'lib/date';
+import Nav from '../components/Nav';
 
 //显示记账明细的页面
 const Detail = () => {
@@ -52,8 +53,9 @@ const Detail = () => {
 
   return (
     <Layout
-      top={Top({records: currentMonthRecords, value, date, onDateChange})}
+      header={Top({records: currentMonthRecords, value, date, onDateChange})}
       main={Main({records: hashMonthRecords, value})}
+      footer={Nav()}
     />
   );
 };

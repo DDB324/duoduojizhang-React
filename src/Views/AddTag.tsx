@@ -1,13 +1,13 @@
 import React, {ChangeEventHandler, useState} from 'react';
 import {TopBar} from './TagsSetting/CategorySetting/TopBar';
-import {WrapperLayout} from '../components/Layout/WrapperLayout';
-import {MainLayout} from '../components/Layout/MainLayout';
 import Icon from '../components/Icon';
 import {amusementTags, foodTags, shoppingTags, studyTags, trafficTags} from '../lib/allTags';
 import styled from 'styled-components';
 import {Input} from '../components/Input';
 import {useTags} from '../hooks/useTags';
 import {useGoPage} from '../lib/goPage';
+import {Layout} from '../components/Layout';
+import {AddTagSection} from './AddTag/AddTagSection';
 
 //新增标签的页面
 const InputWrapper = styled.div`
@@ -15,46 +15,6 @@ const InputWrapper = styled.div`
   border-bottom: 1px solid #eaeaea;
 `;
 
-const Section = styled.section`
-  > h3 {
-    text-align: center;
-    line-height: 60px;
-  }
-
-  > ul {
-    display: flex;
-    flex-wrap: wrap;
-
-    > li {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 25%;
-      padding: 8px 0;
-
-      > div {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-bottom: 4px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #f6f5f5;
-
-        &.selected {
-          background: #ffda43;
-        }
-
-        > .icon {
-          width: 30px;
-          height: 30px;
-        }
-      }
-    }
-  }
-`;
 
 const AddTag: React.FC = () => {
   //获取路径的hash值决定显示标题是收入还是支出
@@ -116,36 +76,38 @@ const AddTag: React.FC = () => {
   };
 
   return (
-    <WrapperLayout className={window.localStorage.getItem('isSafari') === '1' ? 'isSafari' : ''}>
-      <TopBar leftChart='left' leftName='返回'
-              centerName={category === '-' ? '添加支出标签' : '添加收入标签'}
-              rightChart='' rightName='完成'
-              onRight={onComplete}
-              onLeft={goBack}/>
-      <InputWrapper>
-        <Input iconName={selected.selectedTagChart} type='text'
-               placeholder='输入标签名称(不超过4个汉字)' value={selected.tagName}
-               onChange={onChange}/>
-      </InputWrapper>
-      <MainLayout>
-        {
-          categoryList.map(category => {
-            return (
-              <Section key={category}>
-                <h3>{category}</h3>
-                <ul>
-                  {
-                    categoryMap[category].map(tag => {
-                      return tagItem(tag);
-                    })
-                  }
-                </ul>
-              </Section>
-            );
-          })
-        }
-      </MainLayout>
-    </WrapperLayout>
+    <Layout
+      header={
+        <>
+          <TopBar leftChart='left' leftName='返回'
+                  centerName={category === '-' ? '添加支出标签' : '添加收入标签'}
+                  rightChart='' rightName='完成'
+                  onRight={onComplete}
+                  onLeft={goBack}/>
+          <InputWrapper>
+            <Input iconName={selected.selectedTagChart} type='text'
+                   placeholder='输入标签名称(不超过4个汉字)' value={selected.tagName}
+                   onChange={onChange}/>
+          </InputWrapper>
+        </>
+      }
+      main={
+        categoryList.map(category => {
+          return (
+            <AddTagSection key={category}>
+              <h3>{category}</h3>
+              <ul>
+                {
+                  categoryMap[category].map(tag => {
+                    return tagItem(tag);
+                  })
+                }
+              </ul>
+            </AddTagSection>
+          );
+        })
+      }
+    />
   );
 };
 
