@@ -5,6 +5,10 @@ const WrapperLayout = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+
+  &.isSafari {
+    height: calc(100vh - 75px);
+  }
 `;
 
-export {WrapperLayout}
+export {WrapperLayout};

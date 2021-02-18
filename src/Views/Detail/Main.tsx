@@ -15,8 +15,6 @@ type Props = {
 const Main: React.FC<Props> = (props) => {
     const {records, value} = props;
     const {findTag} = useTags();
-    console.log(records);
-    console.log(typeof records);
     if (records.length === 0) {
       return <NoContent/>;
     } else {

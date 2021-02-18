@@ -10,7 +10,9 @@ type Props = {
 
 const Layout = (props: Props) => {
   return (
-    <WrapperLayout>
+    <WrapperLayout className={window.localStorage.getItem('isSafari') === '1' ?
+      'isSafari' :
+      ''}>
       {props.top}
       <MainLayout>
         {props.main}

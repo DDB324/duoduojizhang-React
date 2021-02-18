@@ -116,7 +116,7 @@ const AddTag: React.FC = () => {
   };
 
   return (
-    <WrapperLayout>
+    <WrapperLayout className={window.localStorage.getItem('isSafari') === '1' ? 'isSafari' : ''}>
       <TopBar leftChart='left' leftName='返回'
               centerName={category === '-' ? '添加支出标签' : '添加收入标签'}
               rightChart='' rightName='完成'

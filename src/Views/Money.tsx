@@ -57,7 +57,7 @@ const Money = () => {
   };
 
   return (
-    <WrapperLayout>
+    <WrapperLayout className={window.localStorage.getItem('isSafari') === '1' ? 'isSafari' : ''}>
       <CategorySection category={selected.category}
                        onCategoryChange={(category, selectedTagId) =>
                          onChange({category: category, selectedTagId: selectedTagId})}/>

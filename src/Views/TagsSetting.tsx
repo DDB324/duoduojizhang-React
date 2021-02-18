@@ -11,6 +11,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 100vh;
 
+  &.isSafari {
+    height: calc(100vh - 75px);
+  }
+
   > footer {
     line-height: 50px;
     text-align: center;
@@ -106,7 +110,7 @@ const TagsSetting: React.FC = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper className={window.localStorage.getItem('isSafari') === '1' ? 'isSafari' : ''}>
       <CategorySetting category={category}
                        onCategoryChange={(category) => {setCategory(category);}}/>
       <Main>

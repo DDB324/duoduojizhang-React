@@ -7,6 +7,12 @@ import {Chart} from 'Views/Chart';
 import {TagsSetting} from 'Views/TagsSetting';
 import {AddTag} from 'Views/AddTag';
 
+if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
+  localStorage.setItem('isSafari', '1');
+} else {
+  localStorage.setItem('isSafari', '0');
+}
+
 //配置路由
 function App() {
   return (
