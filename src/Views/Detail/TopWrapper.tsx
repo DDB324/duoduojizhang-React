@@ -5,7 +5,7 @@ const TopWrapper = styled.div`
   background: linear-gradient(180deg, rgba(255, 218, 67, 1) 0%, rgba(255, 255, 255, 1) 100%);
 
   > main {
-    padding: 8px 0;
+    padding: 16px 0;
     text-align: center;
 
     > img {

@@ -42,6 +42,42 @@ const WrapperNumberPad = styled.section`
       &.ok {
         background: #ffda43;
       }
+
+      &.date {
+        position: relative;
+        overflow: hidden;
+
+        > input {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 90%;
+          width: 90%;
+
+          ::-webkit-calendar-picker-indicator {
+            height: 100%;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: inset 0 1px #fff, 0 1px #eee;
+            background-color: #eee;
+            background-image: -webkit-linear-gradient(top, #f0f0f0, #e6e6e6);
+            color: #666;
+          }
+        }
+
+        > div {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 100%;
+          background: #ffda43;
+          pointer-events: none;
+          line-height: 64px;
+          font-size: .8em;
+        }
+      }
     }
   }
 `;

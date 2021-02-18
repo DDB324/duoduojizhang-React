@@ -7,15 +7,16 @@ import {WrapperLayout} from 'components/Layout/WrapperLayout';
 import {MainLayout} from 'components/Layout/MainLayout';
 import {useRecords} from '../hooks/useRecords';
 import {useGoPage} from '../lib/goPage';
+import {today} from 'lib/date';
 
 type Category = '-' | '+';
-
-const defaultFormData = {
+const defaultFormData = () => ({
   category: '-' as Category,
   selectedTagId: [] as number[],
   note: '',
-  amount: 0
-};
+  amount: 0,
+  createAt: today()
+});
 
 let onSubmit = 0;
 
@@ -24,7 +25,7 @@ const Money = () => {
   const {incomeTags, expenditureTags} = useTags();
 
   //储存数据
-  const [selected, setSelected] = useState(defaultFormData);
+  const [selected, setSelected] = useState(defaultFormData());
 
   //接受子组件的参数来修改数据
   const onChange = (obj: Partial<typeof selected>) => {
@@ -72,7 +73,9 @@ const Money = () => {
                           amount={selected.amount}
                           onAmountChange={(amount) => onChange({amount})}
                           selectedTagId={selected.selectedTagId}
-                          onOk={onOk}/>
+                          onOk={onOk}
+                          onDateChange={(createAt: string) => onChange({createAt})}
+                          date={selected.createAt}/>
       }
     </WrapperLayout>
   );

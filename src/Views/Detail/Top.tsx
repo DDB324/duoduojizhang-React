@@ -1,19 +1,18 @@
 import {TopWrapper} from './TopWrapper';
 import title from 'pictures/title.png';
-import day from 'dayjs';
 import {RecordItem} from '../../hooks/useRecords';
+import {year,month} from 'lib/date'
 
 const Top = (records: RecordItem[], value: (records: RecordItem[], category: '+' | '-') => number) => {
-  const currentTime = (new Date()).toISOString();
   return <TopWrapper>
     <main>
       <img src={title} alt=""/>
     </main>
     <div>
       <div className='date'>
-        <div className='year'>{day(currentTime).format('YYYY年')}</div>
+        <div className='year'>{year()+'年'}</div>
         <div className='month'>
-          <div className='month-content'>{day(currentTime).format('MM')}</div>
+          <div className='month-content'>{month()}</div>
           <span>月</span>
           <span className='triangle'/>
           <span className='vertical-line'/>

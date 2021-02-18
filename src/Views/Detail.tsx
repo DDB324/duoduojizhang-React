@@ -1,7 +1,6 @@
 import React from 'react';
 import {Layout} from 'components/Layout';
 import {RecordItem, useRecords} from '../hooks/useRecords';
-import day from 'dayjs';
 import {Top} from 'Views/Detail/Top';
 import {Main} from './Detail/Main';
 
@@ -15,7 +14,7 @@ const Detail = () => {
 
   //对记账数据尽心处理,按照日期分类
   records.forEach(record => {
-    const key = day(record.createAt).format('YYYY-MM-DD');
+    const key = record.createAt
     if (!(key in hash)) {
       hash[key] = [];
     }

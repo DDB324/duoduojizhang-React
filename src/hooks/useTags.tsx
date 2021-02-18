@@ -27,6 +27,9 @@ const defaultExpenditureTags = () => [
   {id: createTagId(), chart: 'sing', name: '唱歌'},
 ];
 
+//储存被删除的标签
+let removeTags: Tag[] = [];
+
 const useTags = () => {
   const [incomeTags, setIncomeTags] = useState<Tag[]>([]);
   const [expenditureTags, setExpenditureTags] = useState<Tag[]>([]);
@@ -84,11 +87,16 @@ const useTags = () => {
     const tagsMap = {'+': incomeTags, '-': expenditureTags};
     const setTagsMap = {'+': setIncomeTags, '-': setExpenditureTags};
     setTagsMap[category](tagsMap[category].filter(tag => tag.id !== removeTagId));
+    const tag = tagsMap[category].filter(tag => tag.id === removeTagId)[0];
+    removeTags.push(tag);
+    window.localStorage.setItem('removedTags', JSON.stringify(removeTags));
   };
 
   //寻找标签
   const findTag = (tagId: number) => {
-    return tags.filter(tag => tag.id === tagId)[0];
+    const removedTags = window.localStorage.getItem('removedTags');
+    const allTags: Tag[] = (removedTags ? JSON.parse(removedTags) : []).concat(tags);
+    return allTags.filter(tag => tag.id === tagId)[0];
   };
 
   // return {incomeTags: incomeTags ...}

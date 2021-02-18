@@ -12,7 +12,7 @@ export type RecordItem = {
 }
 
 //继承某个类型并删除其中的某个属性
-type newRecordItem = Omit<RecordItem, 'createAt' | 'id'>
+type newRecordItem = Omit<RecordItem, 'id'>
 
 const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([]);
@@ -31,7 +31,6 @@ const useRecords = () => {
   const addRecord = (newRecord: newRecordItem) => {
     const record = {
       ...newRecord,
-      createAt: (new Date()).toISOString(),
       id: createRecordId()
     };
     setRecords([...records, record]);

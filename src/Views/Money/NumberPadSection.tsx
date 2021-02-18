@@ -1,8 +1,9 @@
-import React, {ChangeEventHandler, useState} from 'react';
+import React, {ChangeEventHandler, useRef, useState} from 'react';
 import {WrapperNumberPad} from './NumberPadSection/WrapperNumberPad';
 import {Input} from '../../components/Input';
 import {useTags} from '../../hooks/useTags';
 import {generateOutput} from './NumberPadSection/generateOutput';
+import {today} from 'lib/date';
 
 //显示记账页面的数字面板的内容
 type Props = {
@@ -12,10 +13,12 @@ type Props = {
   onAmountChange: (amount: number) => void
   selectedTagId: number[]
   onOk: () => void
+  onDateChange: (createAt: string) => void
+  date: string
 }
 const NumberPadSection: React.FC<Props> = (props) => {
   //声明外部数据
-  const {note, selectedTagId, onOk, onAmountChange} = props;
+  const {note, selectedTagId, onOk, onAmountChange, onDateChange, onNoteChange, date} = props;
 
   //找到selectedTagId对应的图表
   const {findTag} = useTags();
@@ -23,7 +26,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
 
   //onChange函数
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    props.onNoteChange(e.target.value);
+    onNoteChange(e.target.value);
   };
 
   //数字面板计算后输出的内容,总长度不能超过16
@@ -46,7 +49,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
       onAmountChange(parseFloat(output));
       onOk();
     }
-    if (text === '日期') {console.log('日期');}
+    // if (text === '日期') {console.log('日期');}
 
     //使用封装的计算逻辑
     if ('1234567890.+-='.split('').concat(['删除']).indexOf(text) >= 0) {
@@ -54,8 +57,16 @@ const NumberPadSection: React.FC<Props> = (props) => {
       setOutput(computeOutput);
       computeComplete && setComplete(computeComplete);
     }
-
   };
+
+  //获取input type=date元素
+  const inputNode = useRef(null);
+
+  //用当前input的value作为父组件的createAt值
+  const onInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    onDateChange(e.target.value);
+  };
+
   return (
     <WrapperNumberPad>
       <div className='NoteAndOutput'>
@@ -70,7 +81,10 @@ const NumberPadSection: React.FC<Props> = (props) => {
         <button>7</button>
         <button>8</button>
         <button>9</button>
-        <button>日期</button>
+        <button className='date'>
+          <input type="date" ref={inputNode} onChange={onInputChange}/>
+          <div>{date === today() ? '今天' : date}</div>
+        </button>
         <button>4</button>
         <button>5</button>
         <button>6</button>
