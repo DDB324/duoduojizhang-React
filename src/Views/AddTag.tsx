@@ -16,6 +16,8 @@ const InputWrapper = styled.div`
   border-bottom: 1px solid ${gCss.tagBC};
 `;
 
+const TopBarWrapper = styled.div`
+`;
 
 const AddTag: React.FC = () => {
   //获取路径的hash值决定显示标题是收入还是支出
@@ -80,11 +82,13 @@ const AddTag: React.FC = () => {
     <Layout
       header={
         <>
-          <TopBar leftChart='left' leftName='返回'
-                  centerName={category === '-' ? '添加支出标签' : '添加收入标签'}
-                  rightChart='' rightName='完成'
-                  onRight={onComplete}
-                  onLeft={goBack}/>
+          <TopBarWrapper>
+            <TopBar leftChart='left' leftName='返回'
+                    centerName={category === '-' ? '添加支出标签' : '添加收入标签'}
+                    rightChart='' rightName='完成'
+                    onRight={onComplete}
+                    onLeft={goBack}/>
+          </TopBarWrapper>
           <InputWrapper>
             <Input iconName={selected.selectedTagChart} type='text'
                    placeholder='输入标签名称(不超过4个汉字)' value={selected.tagName}
