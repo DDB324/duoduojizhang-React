@@ -9,10 +9,15 @@ import {month, year} from 'lib/date';
 const Detail = () => {
   //获取records
   const {records} = useRecords();
+
+  //日期数据
   const [date, setDate] = useState({
     year: year(),
     month: month()
   });
+
+  //修改日期
+  const onDateChange = (obj: { year: string, month: string }) => {setDate(obj);};
 
   //申明按照日期储存数据的hash表
   const hash: { [K: string]: RecordItem[] } = {}; //{02月16日:[record,record]}
@@ -41,7 +46,7 @@ const Detail = () => {
 
   return (
     <Layout
-      top={Top({records, value, date})}
+      top={Top({records, value, date, onDateChange})}
       main={Main(hashArr, value)}
     />
   );

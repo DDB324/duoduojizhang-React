@@ -7,12 +7,14 @@ type Props = {
   records: RecordItem[]
   value: (records: RecordItem[], category: '+' | '-') => number
   date: { year: string, month: string }
+  onDateChange: (obj: { year: string, month: string }) => void
 }
 
 const Top: React.FC<Props> = (props) => {
-  const {records, value, date} = props;
+  const {records, value, date, onDateChange} = props;
   const onMonthChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    console.log(e.target.value);
+    const [year, month] = e.target.value.split('-');
+    onDateChange({year, month});
   };
   return <TopWrapper>
     <main>
