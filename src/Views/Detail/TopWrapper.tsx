@@ -42,6 +42,7 @@ const TopWrapper = styled.div`
         }
 
         > .month-content-wrapper {
+          width: 100%;
           top: 0;
           left: 0;
           background: #ffda43;

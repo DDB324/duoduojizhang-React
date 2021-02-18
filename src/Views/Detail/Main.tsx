@@ -3,12 +3,19 @@ import {useTags} from '../../hooks/useTags';
 import day from 'dayjs';
 import Icon from '../../components/Icon';
 import {RecordItem} from '../../hooks/useRecords';
+import React from 'react';
 
-const Main = (hashArr:[string, RecordItem[]][],value:(records:RecordItem[],category:'+'|'-')=>number) => {
-  const {findTag} = useTags();
+type Props = {
+  records: [string, RecordItem[]][]
+  value: (records: RecordItem[], category: '+' | '-') => number
+}
+
+const Main: React.FC<Props> = (props) => {
+    const {records, value} = props;
+    const {findTag} = useTags();
     return <MainWrapper>
       {
-        hashArr.map(([date, record]) => (
+        records.map(([date, record]) => (
           <div className='wrapper' key={date}>
             <div className='top'>
               <div className='date'>{day(date).format('MM月DD日 dddd')}</div>
@@ -36,4 +43,4 @@ const Main = (hashArr:[string, RecordItem[]][],value:(records:RecordItem[],categ
   }
 ;
 
-export {Main}
+export {Main};

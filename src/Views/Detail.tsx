@@ -19,11 +19,16 @@ const Detail = () => {
   //修改日期
   const onDateChange = (obj: { year: string, month: string }) => {setDate(obj);};
 
+  //筛选对应月份的records
+  // 数据格式{category:'-',selectedTagId:[1],note:'',amount:10,createAt:'2021-02-01'}
+  const currentYearRecords = records.filter(record => record.createAt.split('-')[0] === date.year);
+  const currentMonthRecords = currentYearRecords.filter(record => record.createAt.split('-')[1] === date.month);
+
   //申明按照日期储存数据的hash表
   const hash: { [K: string]: RecordItem[] } = {}; //{02月16日:[record,record]}
 
   //对记账数据尽心处理,按照日期分类
-  records.forEach(record => {
+  currentMonthRecords.forEach(record => {
     const key = record.createAt;
     if (!(key in hash)) {
       hash[key] = [];
@@ -31,8 +36,9 @@ const Detail = () => {
     hash[key].push(record);
   });
 
-  //将hash表中的数据转换为数组并按照日期的近远排列
-  const hashArr = Object.entries(hash).sort((a, b) => {
+  //将hash表中的数据对象转换为数组并按照日期的近远排列
+  //数据格式[['2021-02-02',Record[]],['2021-02-01',Record[]]]
+  const hashMonthRecords = Object.entries(hash).sort((a, b) => {
     if (a[0] === b[0]) return 0;
     if (a[0] > b[0]) return -1;
     return 1;
@@ -46,8 +52,8 @@ const Detail = () => {
 
   return (
     <Layout
-      top={Top({records, value, date, onDateChange})}
-      main={Main(hashArr, value)}
+      top={Top({records: currentMonthRecords, value, date, onDateChange})}
+      main={Main({records: hashMonthRecords, value})}
     />
   );
 };
