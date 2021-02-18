@@ -1,20 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Layout} from 'components/Layout';
 import {RecordItem, useRecords} from '../hooks/useRecords';
 import {Top} from 'Views/Detail/Top';
 import {Main} from './Detail/Main';
+import {month, year} from 'lib/date';
 
 //显示记账明细的页面
 const Detail = () => {
   //获取records
   const {records} = useRecords();
+  const [date, setDate] = useState({
+    year: year(),
+    month: month()
+  });
 
   //申明按照日期储存数据的hash表
   const hash: { [K: string]: RecordItem[] } = {}; //{02月16日:[record,record]}
 
   //对记账数据尽心处理,按照日期分类
   records.forEach(record => {
-    const key = record.createAt
+    const key = record.createAt;
     if (!(key in hash)) {
       hash[key] = [];
     }
@@ -36,7 +41,7 @@ const Detail = () => {
 
   return (
     <Layout
-      top={Top(records, value)}
+      top={Top({records, value, date})}
       main={Main(hashArr, value)}
     />
   );

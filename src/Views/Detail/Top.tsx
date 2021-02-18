@@ -1,20 +1,30 @@
 import {TopWrapper} from './TopWrapper';
 import title from 'pictures/title.png';
 import {RecordItem} from '../../hooks/useRecords';
-import {year, month} from 'lib/date';
+import React, {ChangeEventHandler} from 'react';
 
-const Top = (records: RecordItem[], value: (records: RecordItem[], category: '+' | '-') => number) => {
+type Props = {
+  records: RecordItem[]
+  value: (records: RecordItem[], category: '+' | '-') => number
+  date: { year: string, month: string }
+}
+
+const Top: React.FC<Props> = (props) => {
+  const {records, value, date} = props;
+  const onMonthChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    console.log(e.target.value);
+  };
   return <TopWrapper>
     <main>
       <img src={title} alt=""/>
     </main>
     <div>
       <div className='date'>
-        <div className='year'>{year() + '年'}</div>
+        <div className='year'>{date.year + '年'}</div>
         <div className='month'>
-          <input type="month"/>
+          <input type="month" onChange={onMonthChange}/>
           <div className="month-content-wrapper">
-            <div className='month-content'>{month()}</div>
+            <div className='month-content'>{date.month}</div>
             <span>月</span>
             <span className='triangle'/>
             <span className='vertical-line'/>
