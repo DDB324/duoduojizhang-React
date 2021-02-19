@@ -47,6 +47,7 @@ const WrapperNumberPad = styled.section`
       &.date {
         position: relative;
         overflow: hidden;
+        background: ${gCss.BG};
 
         > input {
           background: ${gCss.BG};
@@ -64,7 +65,7 @@ const WrapperNumberPad = styled.section`
 
         > div {
           position: absolute;
-          left: 0;
+          right: 0;
           top: 0;
           height: 100%;
           width: 100%;
