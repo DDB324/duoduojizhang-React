@@ -5,10 +5,10 @@ import {gCss} from 'gCss';
 
 //3个主页面下面的导航栏的3个按钮
 const NavUl = styled.ul`
-  box-shadow: ${gCss.BS};
+  box-shadow: ${gCss.topBS};
   line-height: 24px;
   display: flex;
-  
+
   > li {
     width: 33.3%;
     padding: 8px 0 4px;

@@ -9,11 +9,22 @@ const WrapperLayout = styled.div`
   &.isSafari {
     height: calc(100vh - 75px);
   }
+
+  @media (min-width: 500px) {
+    background: #FCFCFC;
+    margin: 0 auto;
+    max-width: 375px;
+    max-height: 667px;
+  }
 `;
 
 const MainLayout = styled.div`
   flex-grow: 1;
   overflow: auto;
+
+  ::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+  }
 `;
 
 type Props = {
