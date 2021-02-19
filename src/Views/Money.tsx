@@ -7,6 +7,8 @@ import {useRecords} from '../hooks/useRecords';
 import {useGoPage} from '../lib/goPage';
 import {today} from 'lib/date';
 import {Layout} from '../components/Layout';
+import {CSSTransition} from 'react-transition-group';
+import 'style.scss';
 
 type Category = '-' | '+';
 const defaultFormData = () => ({
@@ -65,18 +67,24 @@ const Money = () => {
                          onTagChange={(selectedTagId: number[]) => onChange({selectedTagId})}
                          tags={selected.category === '-' ? expenditureTags : incomeTags}/>
       }
-      footer={selected.selectedTagId.length > 0 &&
-      <NumberPadSection note={selected.note}
-                        onNoteChange={(note: string) => onChange({note})}
-                        amount={selected.amount}
-                        onAmountChange={(amount) => onChange({amount})}
-                        selectedTagId={selected.selectedTagId}
-                        onOk={onOk}
-                        onDateChange={(createAt: string) => onChange({createAt})}
-                        date={selected.createAt}/>
+      footer={
+        <CSSTransition in={selected.selectedTagId.length > 0}
+                       timeout={250}
+                       unmountOnExit
+                       classNames='fade'>
+          <NumberPadSection note={selected.note}
+                            onNoteChange={(note: string) => onChange({note})}
+                            amount={selected.amount}
+                            onAmountChange={(amount) => onChange({amount})}
+                            selectedTagId={selected.selectedTagId}
+                            onOk={onOk}
+                            onDateChange={(createAt: string) => onChange({createAt})}
+                            date={selected.createAt}/>
+        </CSSTransition>
       }
     />
   );
 };
 
-export {Money};
+export
+{Money};

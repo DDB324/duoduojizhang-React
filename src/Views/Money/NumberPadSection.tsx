@@ -16,13 +16,18 @@ type Props = {
   onDateChange: (createAt: string) => void
   date: string
 }
+
+let selectedTagChart: string;
+
 const NumberPadSection: React.FC<Props> = (props) => {
   //声明外部数据
   const {note, selectedTagId, onOk, onAmountChange, onDateChange, onNoteChange, date} = props;
 
   //找到selectedTagId对应的图表
   const {findTag} = useTags();
-  const selectedTagChart = findTag(selectedTagId[0])?.chart || 'repase';
+  selectedTagChart = findTag(selectedTagId[0]) ?
+    findTag(selectedTagId[0]).chart :
+    selectedTagChart;
 
   //onChange函数
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {

@@ -1,0 +1,29 @@
+//enter是入场前的刹那（点击按钮），appear指页面第一次加载前的一刹那（自动）
+.fade-enter, .fade-appear {
+  transform: translateY(100%);
+}
+
+//enter-active指入场后到入场结束的过程，appear-active则是页面第一次加载自动执行
+.fade-enter-active, .fade-appear-active {
+  transform: translateX(0);
+  transition: transform 250ms ease-in-out;
+}
+
+//入场动画执行完毕后，保持状态
+.fade-enter-done {
+  transform: translateX(0);
+}
+
+//同理，出场前的一刹那，以下就不详细解释了，一样的道理
+.fade-exit {
+  transform: translateX(0);
+}
+
+.fade-exit-active {
+  transform: translateY(100%);
+  transition: transform 250ms ease-in-out;
+}
+
+.fade-exit-done {
+  transform: translateY(100%);
+}

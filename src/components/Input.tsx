@@ -49,9 +49,9 @@ const Input: React.FC<Props> = (props) => {
   return (
     <Label>
       <div>
-        <Icon name={props.iconName}/>
+        <Icon name={iconName}/>
       </div>
-      {props.spanContent && <span>{props.spanContent}</span>}
+      {spanContent && <span>{spanContent}</span>}
       <input {...rest}/>
     </Label>
   );
