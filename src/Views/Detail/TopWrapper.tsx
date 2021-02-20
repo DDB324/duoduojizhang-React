@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import {gCss} from '../../gCss';
 
+const fontSize = '1.4em';
 const TopWrapper = styled.div`
-  background: #ffda43;
+  background: ${gCss.BG};
   background: linear-gradient(180deg, rgba(255, 218, 67, 1) 80%, rgba(255, 255, 255, 1) 100%);
 
   > main {
@@ -28,7 +30,7 @@ const TopWrapper = styled.div`
         overflow: hidden;
 
         > input {
-          background: #ffda43;
+          background: ${gCss.BG};
           position: absolute;
           left: 0;
           top: 0;
@@ -45,7 +47,7 @@ const TopWrapper = styled.div`
           width: 100%;
           top: 0;
           left: 0;
-          background: #ffda43;
+          background: ${gCss.BG};
           position: absolute;
           pointer-events: none;
           display: flex;
@@ -83,7 +85,7 @@ const TopWrapper = styled.div`
         height: 40px;
         display: flex;
         align-items: flex-end;
-        font-size: 1.6em;
+        font-size: ${fontSize};
       }
     }
 
@@ -97,7 +99,7 @@ const TopWrapper = styled.div`
         height: 40px;
         display: flex;
         align-items: flex-end;
-        font-size: 1.6em;
+        font-size: ${fontSize};
       }
     }
   }
