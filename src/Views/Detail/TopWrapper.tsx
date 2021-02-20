@@ -83,7 +83,7 @@ const TopWrapper = styled.div`
         height: 40px;
         display: flex;
         align-items: flex-end;
-        font-size: 1.8em;
+        font-size: 1.6em;
       }
     }
 
@@ -97,7 +97,7 @@ const TopWrapper = styled.div`
         height: 40px;
         display: flex;
         align-items: flex-end;
-        font-size: 1.8em;
+        font-size: 1.6em;
       }
     }
   }

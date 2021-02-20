@@ -34,11 +34,18 @@ const NumberPadSection: React.FC<Props> = (props) => {
     onNoteChange(e.target.value);
   };
 
-  //数字面板计算后输出的内容,总长度不能超过16
+  //数字面板输入的内容,每个数组最大不能超过8位
   const [output, _setOutput] = useState(props.amount.toString());
   const setOutput = (output: string) => {
-    if (output.length > 16) {
-      output = parseFloat(output.slice(0, 16)).toString();
+    //如果存在'+''-',那么后面一个数的位数不能超过8位
+    if (output.indexOf('+') >= 0 || output.indexOf('-') >= 0) {
+      const plusSecond = output.split('+')[1];
+      const minusSecond = output.split('-')[1];
+      if (plusSecond?.length > 8 || minusSecond?.length > 8) {
+        output = output.slice(0, -1);
+      }
+    } else if (output.length > 8) {
+      output = output.slice(0, -1);
     }
     _setOutput(output);
   };
@@ -54,12 +61,17 @@ const NumberPadSection: React.FC<Props> = (props) => {
       onAmountChange(parseFloat(output));
       onOk();
     }
-    // if (text === '日期') {console.log('日期');}
 
     //使用封装的计算逻辑
     if ('1234567890.+-='.split('').concat(['删除']).indexOf(text) >= 0) {
       const {computeOutput, computeComplete} = generateOutput(text, output);
-      setOutput(computeOutput);
+
+      //两个8位数相加会是9位,直接setOutput处理会变成8位,所以'='计算出来的结果不用对位数进行处理
+      if (text === '=') {
+        _setOutput(computeOutput);
+      } else {
+        setOutput(computeOutput);
+      }
       computeComplete && setComplete(computeComplete);
     }
   };
