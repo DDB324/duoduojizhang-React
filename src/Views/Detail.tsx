@@ -55,7 +55,11 @@ const Detail = () => {
     <Layout
       header={Top({records: currentMonthRecords, value, date, onDateChange})}
       main={Main({records: hashMonthRecords, value})}
-      footer={Nav()}
+      footer={
+        <div>
+          <Nav/>
+        </div>
+      }
     />
   );
 };

@@ -4,10 +4,10 @@ import styled from 'styled-components';
 const WrapperLayout = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  max-height: 100vh;
 
   &.isSafari {
-    height: calc(100vh - 75px);
+    max-height: calc(100vh - 75px);
   }
 
   @media (min-width: 500px) {

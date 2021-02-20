@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import {gCss} from '../../gCss';
 
 const MainWrapper = styled.div`
-  overflow-x: hidden;
 
   .wrapper {
 
