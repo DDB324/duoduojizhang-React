@@ -5,6 +5,7 @@ import {Top} from 'Views/Detail/Top';
 import {Main} from './Detail/Main';
 import {month, year} from 'lib/date';
 import Nav from '../components/Nav';
+import NP from 'number-precision';
 
 //显示记账明细的页面
 const Detail = () => {
@@ -48,7 +49,7 @@ const Detail = () => {
   //计算总收入总支出的函数
   const value = (records: RecordItem[], category: '+' | '-') => {
     const expenditureArr = records.filter(record => record.category === category).map(x => x.amount);
-    return expenditureArr.reduce((sum, n) => sum + n, 0);
+    return expenditureArr.reduce((sum, n) => NP.plus(sum, n), 0);
   };
 
   return (
