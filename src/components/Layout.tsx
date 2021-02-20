@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const WrapperLayout = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
+  height: 100vh;
 
   &.isSafari {
     height: calc(100vh - 75px);
@@ -13,8 +13,8 @@ const WrapperLayout = styled.div`
   @media (min-width: 500px) {
     background: #FCFCFC;
     margin: 0 auto;
-    max-width: 375px;
-    max-height: 667px;
+    width: 375px;
+    height: 667px;
   }
 `;
 
