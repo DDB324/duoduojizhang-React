@@ -30,6 +30,10 @@ const MainWrapper = styled.div`
         align-items: center;
         position: relative;
 
+        > header {
+          display: none;
+        }
+
         > .icon-wrapper {
           display: flex;
           align-items: center;
@@ -52,6 +56,13 @@ const MainWrapper = styled.div`
 
         > .record-amount {
 
+        }
+
+        > button {
+          margin-left: 8px;
+          padding: 4px 12px;
+          background: #ed736e;
+          color: white;
         }
 
         > .vertical-line {
