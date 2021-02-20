@@ -14,7 +14,7 @@ const Top: React.FC<Props> = (props) => {
   const {records, value, date, onDateChange} = props;
   const onMonthChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const [year, month] = e.target.value.split('-');
-    onDateChange({year, month});
+    year && month && onDateChange({year, month});
   };
   return <TopWrapper>
     <main>

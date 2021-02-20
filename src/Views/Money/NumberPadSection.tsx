@@ -69,7 +69,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
 
   //用当前input的value作为父组件的createAt值
   const onInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onDateChange(e.target.value);
+    e.target.value && onDateChange(e.target.value);
   };
 
   return (
