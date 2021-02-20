@@ -87,6 +87,8 @@ const useTags = () => {
     const tagsMap = {'+': incomeTags, '-': expenditureTags};
     const setTagsMap = {'+': setIncomeTags, '-': setExpenditureTags};
     setTagsMap[category](tagsMap[category].filter(tag => tag.id !== removeTagId));
+
+    //将删除的标签记录到localstorage中
     const tag = tagsMap[category].filter(tag => tag.id === removeTagId)[0];
     removeTags.push(tag);
     window.localStorage.setItem('removedTags', JSON.stringify(removeTags));

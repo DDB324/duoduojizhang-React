@@ -7,7 +7,7 @@ const WrapperLayout = styled.div`
   max-height: 100vh;
 
   &.isSafari {
-    max-height: calc(100vh - 75px);
+    height: calc(100vh - 75px);
   }
 
   @media (min-width: 500px) {

@@ -10,10 +10,11 @@ import {NoContent} from 'components/NoContent';
 type Props = {
   records: [string, RecordItem[]][]
   value: (records: RecordItem[], category: '+' | '-') => number
+  removeRecord:(removeRecordId:number)=>void
 }
 
 const Main: React.FC<Props> = (props) => {
-    const {records, value} = props;
+    const {records, value,removeRecord} = props;
     const {findTag} = useTags();
 
     //控制删除按钮的显示
@@ -57,7 +58,7 @@ const Main: React.FC<Props> = (props) => {
                     </div>
                     <div className='record-amount'>{(record.category === '-' ? '-' : '') + record.amount}</div>
                     {id.indexOf(record.id) >= 0 &&
-                    <button onClick={() => console.log('删除')}>删除</button>}
+                    <button onClick={() => removeRecord(record.id)}>删除</button>}
                     <span className='vertical-line'/>
                   </li>
                 ))}

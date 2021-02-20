@@ -36,7 +36,14 @@ const useRecords = () => {
     setRecords([...records, record]);
   };
 
-  return {records, addRecord};
+  //删除记账内容
+  const removeRecord = (removeRecordId: number) => {
+    if (window.confirm('确定要删除当前记录吗?')) {
+      setRecords(records.filter(record => record.id !== removeRecordId));
+    }
+  };
+
+  return {records, addRecord, removeRecord};
 };
 
 export {useRecords};

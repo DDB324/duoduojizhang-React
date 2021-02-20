@@ -9,7 +9,7 @@ import Nav from '../components/Nav';
 //显示记账明细的页面
 const Detail = () => {
   //获取records
-  const {records} = useRecords();
+  const {records, removeRecord} = useRecords();
 
   //日期数据
   const [date, setDate] = useState({
@@ -54,7 +54,7 @@ const Detail = () => {
   return (
     <Layout
       header={Top({records: currentMonthRecords, value, date, onDateChange})}
-      main={Main({records: hashMonthRecords, value})}
+      main={Main({records: hashMonthRecords, value, removeRecord})}
       footer={
         <div>
           <Nav/>
