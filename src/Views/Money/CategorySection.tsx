@@ -40,10 +40,11 @@ const Wrapper = styled.section`
     transform: translateY(-50%);
   }
 `;
-type Category = '-' | '+';
+export type Category = '-' | '+';
 type Props = {
   category: Category
   onCategoryChange: (category: Category, selectedTagId: number[]) => void
+  right?:string
 }
 
 //记账页面上面的导航栏,切换收入支出
@@ -54,8 +55,8 @@ const CategorySection: React.FC<Props> = (props) => {
   //获取属性名的类型
   type Keys = keyof typeof categoryMap
 
-  //获取组件外部传来的category
-  const category = props.category;
+  //获取组件外部传来的变量
+  const {category,onCategoryChange,right} = props;
 
   //声明内部属性categoryList
   const [categoryList] = useState<Keys[]>(['-', '+']);
@@ -63,7 +64,7 @@ const CategorySection: React.FC<Props> = (props) => {
   //防止多次点击同一个category造成函数多次执行
   const onToggleCategory = (e: React.MouseEvent, c: Category) => {
     if (e.currentTarget.querySelector('span')?.innerHTML !== categoryMap[category]) {
-      return props.onCategoryChange(c, []);
+      return onCategoryChange(c, []);
     }
   };
 
@@ -87,7 +88,7 @@ const CategorySection: React.FC<Props> = (props) => {
           )
         }
       </ul>
-      <span onClick={() => goTo('/')}>取消</span>
+      {right && <span onClick={() => goTo('/')}>{right}</span>}
     </Wrapper>
   );
 };

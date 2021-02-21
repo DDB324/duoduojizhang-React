@@ -58,6 +58,7 @@ const Money = () => {
   return (
     <Layout
       header={<CategorySection category={selected.category}
+                               right='取消'
                                onCategoryChange={(category, selectedTagId) =>
                                  onChange({category: category, selectedTagId: selectedTagId})}/>
       }
