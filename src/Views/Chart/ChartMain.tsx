@@ -1,22 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
 import {gCss} from '../../gCss';
-import {useRecords} from '../../hooks/useRecords';
+import {RecordItem} from '../../hooks/useRecords';
 import Icon from '../../components/Icon';
 import {useTags} from '../../hooks/useTags';
 import ReactECharts from 'echarts-for-react';
-import dayjs from 'dayjs';
-import NP from 'number-precision';
+import {NoContent} from '../../components/NoContent';
 
-const EchartsWrapper = styled.div`
+const Wrapper = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: auto;
+`;
+
+const EchartsWrapper = styled.div`
   border-bottom: 1px solid ${gCss.borderColor};
+  padding: 4px;
+
+  > .average {
+    font-size: .9em;
+  }
 `;
 
 const RecordsWrapper = styled.div`
+  flex-grow: 1;
+  overflow: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    padding: 8px;
+  }
 
   > ul {
+    overflow: auto;
 
     > li {
       display: flex;
@@ -77,95 +96,48 @@ const RecordsWrapper = styled.div`
     }
   }
 `;
+type Props = {
+  option: {}
+  records: RecordItem[]
+  totalAmount: number
+  averageAmount: string
+}
 
-const ChartMain: React.FC = () => {
+const ChartMain: React.FC<Props> = (props) => {
+  const {option, records, totalAmount, averageAmount} = props;
   const {findTag} = useTags();
-  //[{date:'2-7',records:[]}]
-  const {records} = useRecords();
-  const dateValue = [];
-  for (let i = 0; i < 7; i++) {
-    const date = dayjs().subtract(i, 'day').format('YYYY-MM-DD');
-
-    //找到当前日期对应的记账记录
-    const currentRecordsAmount = records.filter(record => record.createAt === date).map(record => record.amount);
-    //将每天的记账记录相加
-    const sumAmount = currentRecordsAmount.reduce((sum, n) => NP.plus(sum, n), 0);
-    dateValue.unshift({date, sumAmount});
-  }
-  const showDate = dateValue.map(item => dayjs(item.date).format('MM-DD'));
-  const showValue = dateValue.map(item => item.sumAmount);
-  const option = {
-    tooltip: {
-      confine: true,
-      show: true,
-      position: 'top',
-      triggerOn: 'mousemove|click',
-      formatter: '{c}',
-    },
-    grid: {
-      left: 0,
-      top: '20%',
-      right: 0,
-      bottom: '20%',
-    },
-    xAxis: {
-      type: 'category',
-      data: showDate,
-      axisTick: {show: false, alignWithLabel: true},
-    },
-    yAxis: {
-      show: false,
-      type: 'value'
-    },
-    series: [
-      {
-        symbolSize: 8,
-        data: showValue,
-        type: 'line',
-        itemStyle: {
-          color: gCss.BG
-        },
-        symbol: 'circle',
-        markPoint: {
-          symbol: 'circle',
-          symbolSize: 0,
-          symbolOffset: [0, -12],
-          data: [
-            {type: 'max', name: '最大值'},
-          ]
-        },
-      }
-    ]
-  };
   return (
-    <>
+    <Wrapper>
       <EchartsWrapper>
-        <div>总支出:</div>
-        <div>平均值:</div>
+        <div className='total'>总支出:{totalAmount}</div>
+        <div className='average'>平均值:{averageAmount}</div>
         <ReactECharts
           option={option}
           style={{height: 200}}
         />
       </EchartsWrapper>
       <RecordsWrapper>
-        <div><strong>本周支出记录</strong></div>
-        <ul>
-          {records.map(record => (
-            <li key={record.id}>
-              <header>{record.id}</header>
-              <div className='icon-wrapper'>
-                <Icon name={findTag(record.selectedTagId[0]).chart}/>
-              </div>
-              <div className='record-name'>
-                {record.note ? record.note : findTag(record.selectedTagId[0]).name}
-              </div>
-              <div className='record-amount'>{(record.category === '-' ? '-' : '') + record.amount}</div>
-              <span className='vertical-line'/>
-            </li>
-          ))}
-        </ul>
+        <div><strong>本周记账记录</strong></div>
+        {records.length === 0 ?
+          <NoContent/> :
+          <ul>
+            {records.map(record => (
+              <li key={record.id}>
+                <header>{record.id}</header>
+                <div className='icon-wrapper'>
+                  <Icon name={findTag(record.selectedTagId[0]).chart}/>
+                </div>
+                <div className='record-name'>
+                  {record.note ? record.note : findTag(record.selectedTagId[0]).name}
+                </div>
+                <div className='record-amount'>{(record.category === '-' ? '-' : '') + record.amount}</div>
+                <span className='vertical-line'/>
+              </li>
+            ))}
+          </ul>
+        }
       </RecordsWrapper>
-    </>
+    </Wrapper>
   );
 };
 
