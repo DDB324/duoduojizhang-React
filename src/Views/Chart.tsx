@@ -53,12 +53,18 @@ const Chart = () => {
         <CategorySection category={category}
                          onCategoryChange={(category) => {setCategory(category);}}/>
       }
-      main={<ChartMain option={option(showDate, showValue)}
-                       records={currentCategoryRecords}
-                       totalAmount={totalAmount}
-                       averageAmount={averageAmount}
-      />}
-      footer={Nav()}
+      main={
+        <ChartMain option={option(showDate, showValue)}
+                   records={currentCategoryRecords}
+                   totalAmount={totalAmount}
+                   averageAmount={averageAmount}
+        />
+      }
+      footer={
+        <div>
+          <Nav/>
+        </div>
+      }
     />
   );
 };
